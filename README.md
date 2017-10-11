@@ -1,22 +1,14 @@
 # Module 2 Group Assignment: Generation Station
 
-CSCI 5117, Fall 2017
+CSCI 5117, Fall 2017 -- [Assignment description](https://docs.google.com/document/d/1Z_NWRqz4M6dhsfzU2l9alMWpy0PK0xj38uP8qPEZvdY/edit?usp=sharing)
 
-[Assignment description](https://docs.google.com/document/d/1Z_NWRqz4M6dhsfzU2l9alMWpy0PK0xj38uP8qPEZvdY/edit?usp=sharing)
+## App Info:
 
-Please fill out all of the following sections to help us grade your submission:
+* Team Name: TODO
+* App Name: TODO
+* App Link: <https://TODO.herokuapp.com/>
 
-
-## App:
-
-* Name: APP_NAME_TODO
-* Link: <https://TODO.herokuapp.com/>
-
-
-## Name of Team: x
-
-
-## Students
+### Students
 
 * First Last, x500@umn.edu
 * ...
