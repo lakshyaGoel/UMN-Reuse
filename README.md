@@ -4,13 +4,13 @@ CSCI 5117, Fall 2017, [assignment description](https://docs.google.com/document/
 
 ## App Info:
 
-* Team Name: TODO
+* Team Name: val=n
 * App Name: TODO
 * App Link: <https://TODO.herokuapp.com/>
 
 ### Students
 
-* First Last, x500@umn.edu
+* Lakshya Goel, goel0072@umn.edu
 * ...
 
 
