@@ -2,3 +2,27 @@
 <p>
 	This is views/partials/roadside.hbs
 </p>
+
+<p>
+	<div class="form-example">
+		{{input "Item Name" "text" required=true placeHolder="put Item Name here."}}
+		{{input "Item Price" "text" required=true placeHolder="put Item Price here."  isNum=true}}
+		{{input "Item Description" "textarea"}}
+
+		<div class="field is-horizontal">
+			<div class="field-label">
+				<!-- Left empty for spacing -->
+			</div>
+			<div class="field-body">
+				<div class="field">
+					<div class="control">
+						<button class="button is-primary">
+							Send message
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</p>
