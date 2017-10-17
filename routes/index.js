@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var User = require("../model/user");
 
 /* GET home page. */
 router.get('/', function(req, res, next){
 
     // TODO: db operation example
+    var User = require("../model/user");
 
     /**
      * Basic insert(Create) operation
@@ -39,29 +39,42 @@ router.get('/', function(req, res, next){
      */
     User.findOne()
         .where({name: "Akifumi"})
-        .where({email: "nakam052@umn.edu"})// equivalent to follwing SQL command. SELECT * from User where name="Akifumi" AND email="nakam052@umn"
+        //.where({email: "nakam052@umn.edu"})// equivalent to follwing SQL command. SELECT * from User where name="Akifumi" AND email="nakam052@umn"
         .exec(function(err, column){
             if(err){
                 console.log("error occur");
             }
-            console.log("call from index.js");
+            //console.log("call from index.js");
 
             if(column){
-                console.log(column.name);
 
                 // no relation about explanation
-                // console.log("console here",res.locals.user);
+                // console.log("console here",res.locals.user);// confirm auth0 user object
 
+                var BuySellItem = require("../model/buySellItem");
+                var buySellItem = new BuySellItem();
+
+                buySellItem.name = "Pen";
+                buySellItem.description = "This is a pen";
+                buySellItem.price = 10;
+                console.log("column:", column._id);
+                buySellItem.userId = column._id;
+                buySellItem.save(function(err){
+                    if(err){
+                        console.log("error");
+                    }else{
+                        console.log("saved");
+                        res.render('index.hbs', {
+                            name: "There is no such item",
+                            title: "Reuse"
+                        });
+                    }
+                });
                 // end of no relation about explanation
-                res.render('index', {
-                    name: column.name,
-                    title: "Reuse"
-                });
             }else{
-                res.render('index.hbs', {
-                    name: "There is no such item",
-                    title: "Reuse"
-                });
+                console.log("run here");
+                // add test
+
             }
 
         });
