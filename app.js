@@ -6,7 +6,7 @@ const favicon = require('serve-favicon');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-const expressMongoDb = require('express-mongo-db');
+// const expressMongoDb = require('express-mongo-db');// to remove req.db.collection? or something like that.
 const passport = require('passport');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -39,7 +39,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(expressMongoDb(process.env.DB_URI));
+// app.use(expressMongoDb(process.env.DB_URI));// to remove req.db.collection? or something like that.
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
