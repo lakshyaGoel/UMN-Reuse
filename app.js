@@ -19,8 +19,17 @@ const index = require('./routes/index');
 const app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'hbs');
+var hbs = require('express-hbs');
+
+// Use `.hbs` for extensions and find partials in `views/partials`.
+app.engine('hbs', hbs.express4({
+    defaultLayout:path.join(__dirname, "views/layout.hbs"),
+    partialsDir: __dirname + '/views/partials'
+}));
 app.set('view engine', 'hbs');
+app.set('views', __dirname + '/views');
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -40,6 +49,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// TODO: MEMO! user is from here
 app.use(function(req, res, next) {
   // always make req.user available to the template
   res.locals.user = req.user;
