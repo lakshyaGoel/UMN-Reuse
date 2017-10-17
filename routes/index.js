@@ -68,9 +68,9 @@ router.get('/', function(req, res, next){
                             name: "There is no such item",
                             title: "Reuse"
                         });
-                        // end of no relation about explanation
                     }
                 });
+                // end of no relation about explanation
             }else{
                 console.log("run here");
                 // add test
