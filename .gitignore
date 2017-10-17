@@ -31,3 +31,6 @@ npm-debug.log
 
 # add reiven system part
 .idea
+
+# unnecessary map file
+*.map
