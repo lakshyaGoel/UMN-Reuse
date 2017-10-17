@@ -22,6 +22,7 @@ const app = express();
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'hbs');
 var hbs = require('express-hbs');
+var functions = require("./functions");
 
 // Use `.hbs` for extensions and find partials in `views/partials`.
 app.engine('hbs', hbs.express4({
@@ -30,6 +31,7 @@ app.engine('hbs', hbs.express4({
 }));
 app.set('view engine', 'hbs');
 app.set('views', __dirname + '/views');
+functions.hbsHelper();
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));

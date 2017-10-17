@@ -1,4 +1,31 @@
 <h1>姿形も十人十色だから惹かれあうの〜</h1>
 <p>
 	This is views/partials/myitem.hbs
+<hr>
+<h2 class="subtitle">Form Example</h2>
+<p>
+	Detail of { { input } } is in functions.js. Check it out! Also, check following html(input tag).
+	You could easily understand that.
+
+</p>
+<div class="form-example">
+	{{input "Item Name" "text" required=true placeHolder="put Item Name here."}}
+	{{input "Item Price" "text" required=true placeHolder="put Item Price here."}}
+	{{input "Item Description" "textarea" num=true}}
+
+	<div class="field is-horizontal">
+		<div class="field-label">
+			<!-- Left empty for spacing -->
+		</div>
+		<div class="field-body">
+			<div class="field">
+				<div class="control">
+					<button class="button is-primary">
+						Send message
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </p>
