@@ -40,6 +40,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// TODO: MEMO! user is from here
 app.use(function(req, res, next) {
   // always make req.user available to the template
   res.locals.user = req.user;

@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>{{title}}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <link rel="icon" href="/favicon.ico" />
-  </head>
-  <body>
+<head>
+	<title>{{title}}</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.min.css">
+	<link rel='stylesheet' href='/stylesheets/style.css'/>
+	<link rel="icon" href="/favicon.ico"/>
+</head>
+<body>
 
-    <nav class="navbar is-light">
-      <div class="navbar-menu">
-        <div class="navbar-start">
-          <a class="navbar-item title" href="/">val=n Project</a>
-        </div>
-        <div class="navbar-end">
-          {{#if user}}
-            <span class="navbar-item">
+<nav class="navbar is-light">
+	<div class="navbar-menu">
+		<div class="navbar-start">
+			<a class="navbar-item title" href="/">val=n Project</a>
+		</div>
+		<div class="navbar-end">
+			{{#if user}}
+				<span class="navbar-item">
               <figure class="image is-16x16">
                 <img src="{{ user.picture }}" alt="Image">
               </figure>
               &nbsp;
-              {{ user.displayName }}
+					{{ user.nickname }}
             </span>
-            <a class="navbar-item" href="/logout">log out</a>
-          {{else}}
-            <a class="navbar-item" href="/login">log in</a>
-          {{/if}}
-        </div>
-      </div>
-    </nav>
+				<a class="navbar-item" href="/logout">log out</a>
+			{{else}}
+				<a class="navbar-item" href="/login">log in</a>
+			{{/if}}
+		</div>
+	</div>
+</nav>
 
-    <section class="section">
-      <div class="content">
-        <p>Some Content</p>
-      </div>
-    </section>
+<section class="section">
+	<div class="tabs is-large">
+		<ul>
+			<li class="is-active"><a class="switch-BuySell">Buy</a></li>
+			<li><a class="switch-Roadside">Roadside</a></li>
+			{{#if user}}
+				<li><a class="switch-Roadside">My Items</a></li>
+			{{/if}}
+		</ul>
+	</div>
+	<div class="content">
+		{{#if user}}
+			<p>Some Content</p>
+		{{/if}}
+	</div>
+</section>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="/javascripts/local.js"></script>
-    {{#each scripts}}
-      <script src="/javascripts/{{this}}"></script>
-    {{/each}}
-  </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/javascripts/local.js"></script>
+{{#each scripts}}
+	<script src="/javascripts/{{this}}"></script>
+{{/each}}
+</body>
 </html>
