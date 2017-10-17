@@ -44,7 +44,7 @@ router.get('/', function(req, res, next){
             if(err){
                 console.log("error occur");
             }
-            console.log("run here");
+            console.log("call from index.js");
 
             if(column){
                 console.log(column.name);

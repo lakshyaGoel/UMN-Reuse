@@ -1,0 +1,58 @@
+/*
+# How to use scss
+
+- If you are a mac user,
+First, run the terminal and update ruby with brew or port command.
+The command is
+`brew install ruby`
+
+Next, update gem(ruby's npm)
+`gem update --system`
+
+Next, install scss compiler by gem(ruby's npm)
+`gem install sass`
+
+Next, run
+ `npm install -g grunt-cli`
+ and
+ `npm install`
+
+Finally, when you start writing scss,
+run
+
+`grunt`
+
+command,
+it's automatically detect the change what you do and generate css.
+
+# How to write scss
+
+scss is really simple, if you don't want to learn, just put pure css code.
+It's scss!
+Or if you know more,
+try following scss(css) code!
+```
+body{
+  h1{
+  background-color: #0f0;
+   }
+}
+```
+Then, compile this scss, you could get following css
+
+```
+body h1{
+  background-color: #0f0;
+}
+```
+Does it make sense?
+Yes, the scss could use nest structure!
+
+Or, if you don't want to try,
+Anyway, you should write any of your css code in your name's scss file.
+
+when someone compile scss,
+the css is completely overwrite,
+so if you write any css in style.css,
+completely delete what you do!
+*/
