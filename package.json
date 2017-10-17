@@ -26,6 +26,10 @@
     "serve-favicon": "~2.4.2"
   },
   "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib": "^0.11.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
     "nodemon": "^1.12.1"
   }
 }

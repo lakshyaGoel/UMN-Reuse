@@ -34,3 +34,6 @@ npm-debug.log
 
 # unnecessary map file
 *.map
+
+# .sass-cache
+.sass-cache

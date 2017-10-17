@@ -1,6 +1,7 @@
 $(function() {
   console.log('local.js ready');
 
+  // tab control
   $(".switch-BuySell, .switch-Roadside, .switch-MyItems").on("click", function(){
     var label = $(this).attr("class").replace("switch-", "");
     console.log(label);
@@ -14,7 +15,25 @@ $(function() {
       }
     });
     $("#section-" + label).removeClass("is-hidden");
-  });
+  });// end: $(".switch-BuySell, .switch-Roadside, .switch-MyItems").on("click", function(){
 
 
+  // function formValidate
+  function isNotBlank(jQuerySelector){
+    var result = false;
+    if($(jQuerySelector).val() != ""){
+      result = true;
+    }
+    return result;
+  }
+
+  // function formValidate
+  function isNum(jQuerySelector){
+    var result = false;
+    if(/[0-9]+/.test($(jQuerySelector).val())){
+      result = true;
+    }
+    return result;
+  }
 });
+

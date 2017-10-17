@@ -21,7 +21,7 @@ module.exports.hbsHelper = function(){
          * - required
          * - placeHolder
          * - isNum(validate number) # not added this feature but add in the future
-         * - notBlank # not added this feature but add in the future
+         * - noBlank # not added this feature but add in the future
          *
          * usage example(try it if you are tired to read following code)
          *
@@ -32,8 +32,6 @@ module.exports.hbsHelper = function(){
 
         if(typeof(name) == "string"){
             var label = name.replace(/\s+/, "_");
-
-            console.log("options: ",options.hash.num);
 
             var requiredText = "";
             if(options.hash.required){
@@ -49,9 +47,17 @@ module.exports.hbsHelper = function(){
                 placeHolder = "";
             }
 
-            var input = '<input class="input" type="text" id="' + label + '" '+ 'name="' + label + '"' + placeHolder + '>';
+            var additionalClassName = "";
+            if(options.hash.isNum){
+                additionalClassName += "isNum";
+            }
+            if(options.hash.noBlank){
+                additionalClassName += " noBlank";
+            }
+
+            var input = '<input class="input ' + additionalClassName + '" type="text" id="' + label + '" '+ 'name="' + label + '"' + placeHolder + '>';
             if(type == "textarea"){
-                input = '<textarea class="textarea" id="' + label + '" '+ placeHolder + '></textarea>';
+                input = '<textarea class="textarea' + additionalClassName + '" id="' + label + '" '+ placeHolder + '></textarea>';
             }
 
             return new hbs.SafeString(
