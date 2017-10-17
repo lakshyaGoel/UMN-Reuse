@@ -1,2 +1,65 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<nav class="navbar is-light">
+	<div class="container">
+	<div class="navbar-menu">
+		<div class="navbar-start">
+			<a class="navbar-item title" href="/">val=n Project</a>
+		</div>
+		<div class="navbar-end">
+			{{#if user}}
+				<span class="navbar-item">
+              <figure class="image is-16x16">
+                <img src="{{ user.picture }}" alt="Image">
+              </figure>
+              &nbsp
+					{{ user.nickname }}
+            </span>
+				<a class="navbar-item" href="/logout">log out</a>
+			{{else}}
+				<a class="navbar-item" href="/login">log in</a>
+			{{/if}}
+		</div>
+	</div>
+	</div>
+</nav>
+
+<main>
+	<div class="tabs is-large">
+		<ul>
+			<li class="is-active"><a class="switch-BuySell">Buy</a></li>
+			<li><a class="switch-Roadside">Roadside</a></li>
+			{{#if user}}
+				<li><a class="switch-MyItems">My Items</a></li>
+			{{/if}}
+		</ul>
+	</div>
+
+	<article>
+		{{!-- BEGIN: BuySellItems --}}
+		<section class="section" id="section-BuySell">
+			<div class="container">
+				{{> buysell}}
+			</div>
+		</section>
+		{{!-- END: BuySellItems --}}
+
+		{{!-- BEGIN: RoadsideItems --}}
+		<section class="section is-hidden" id="section-Roadside">
+			<div class="container">
+				{{> roadside}}
+			</div>
+		</section>
+		{{!-- END: BuySellItems --}}
+
+
+		{{!-- BEGIN: MyItem --}}
+		{{#if user}}
+		<section class="section is-hidden" id="section-MyItems">
+			<div class="container">
+				{{> myitem}}
+			</div>
+		</section>
+		{{/if}}
+		{{!-- END: MyItem --}}
+	</article>
+</main>
+

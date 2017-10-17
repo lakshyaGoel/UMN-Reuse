@@ -58,7 +58,7 @@ router.get('/', function(req, res, next){
                     title: "Reuse"
                 });
             }else{
-                res.render('index', {
+                res.render('index.hbs', {
                     name: "There is no such item",
                     title: "Reuse"
                 });
