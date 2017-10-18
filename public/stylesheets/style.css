@@ -170,4 +170,8 @@ completely delete what you do!
 body {
   background-color: #fefefe; }
 
+.fullwidth {
+  display: block;
+  height: 400px; }
+
 /*# sourceMappingURL=style.css.map */
