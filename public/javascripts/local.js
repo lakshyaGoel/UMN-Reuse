@@ -1,7 +1,7 @@
 $(function(){
     console.log('local.js ready');
 
-    // tab control
+    // Begin: tab control
     $(".switch-BuySell, .switch-Roadside, .switch-MyItems").on("click", function(){
         var label = $(this).attr("class").replace("switch-", "");
         console.log(label);
@@ -16,6 +16,22 @@ $(function(){
         });
         $("#section-" + label).removeClass("is-hidden");
     });// end: $(".switch-BuySell, .switch-Roadside, .switch-MyItems").on("click", function(){
+    // END: tab control
+
+    // open add Item Modal in MyItem tab
+    $("#openItemModal").on("click", function(){
+        $("#addItem").addClass("is-active");
+    });
+    // close add Item Modal when clicking close button
+    $("#closeAddItemModal").on("click", function(){
+       $("#addItem").removeClass("is-active");
+    });
+    // close add Item Modal when clicking outside of the modal
+    $("#addItem .modal-background").on("click", function(event){
+        if(!$(event.target).closest('.addItemModalCard').length) {
+            $("#addItem").removeClass("is-active");
+        }
+    });
 
 
     // function formValidate
@@ -50,5 +66,9 @@ $(function(){
     $(".switch-Roadside").on("click", function(){
         initMap();
     });
+
+    // Lakshya
+
+
 });
 

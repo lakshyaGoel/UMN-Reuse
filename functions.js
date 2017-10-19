@@ -18,6 +18,7 @@ module.exports.hbsHelper = function(){
          * {{input {text name of the item} {form type}["text"|"textarea"] [required={required label}[true|false]] [placeHolder={placeholder text}] }}
          *
          * property
+         * - id: input's id value(if neccesary) if not given, the id attribute is label value but space character replace to "_"
          * - required
          * - placeHolder
          * - isNum(validate number) # not added this feature but add in the future
@@ -55,9 +56,13 @@ module.exports.hbsHelper = function(){
                 additionalClassName += " noBlank";
             }
 
+            if(options.hash.id){
+                label = options.hash.id;
+            }
+
             var input = '<input class="input ' + additionalClassName + '" type="text" id="' + label + '" '+ 'name="' + label + '"' + placeHolder + '>';
             if(type == "textarea"){
-                input = '<textarea class="textarea' + additionalClassName + '" id="' + label + '" '+ placeHolder + '></textarea>';
+                input = '<textarea class="textarea' + additionalClassName + '" id="' + label + '" '+  ' name="' + label + '" ' + placeHolder + '></textarea>';
             }
 
             return new hbs.SafeString(
