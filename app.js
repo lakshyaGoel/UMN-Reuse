@@ -15,7 +15,7 @@ const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 const auth = require('./auth');
 
 const index = require('./routes/index');
-
+const item = require('./routes/item');
 const app = express();
 
 // view engine setup
@@ -57,9 +57,11 @@ app.use(function(req, res, next) {
   res.locals.user = req.user;
   next();
 });
-
+app.use('/', item);
 app.use('/', index);
+
 app.use('/', auth.router);
+
 /*app.get('/protected', ensureLoggedIn('/login'), function(req, res, next) {
   res.render('protected');
 });*/
