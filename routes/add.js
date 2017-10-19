@@ -6,24 +6,46 @@
  * or
  * localhost:3000/add/[item type]/
  */
-
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next){
-    // TODO: step0(outside of this route file): first modify app.js to use this route.
-    // TODO: step1: confirm user login
-    // TODO: step2: confirm data type={buySell or roadSide}, create or update?
-        // if update, send the current data. else nothing!
+router.get('/:itemType/', function(req, res, next){
+    var title = "Add ";
+    var isRoadside = false;
+    if(req.params.itemType == "item"){// add new buy sell item
+        title += "selling Item";
 
-    // TODO: Must use Promise()! It is better than callback chain.(when update I need you, Promise() )
+    }else if(req.params.itemType == "roadside"){// add new roadside item
+        title += "roadside Item";
+        isRoadside = true;
+    }else{// illegal url
+        res.render("error");
+    }
+
+    res.render('addItem.hbs', {
+        title: title,
+        itemType: req.params.itemType,
+        isRoadside: isRoadside,
+        scripts:["addItemFormControl.js"]
+    });
 });
 
+
 /* POST home page. */
-router.post('/', function(req, res, next){
-    // TODO: step0(outside of this route file): first modify app.js to use this route.
-    // TODO: step1: confirm user login
-    // TODO: step2: confirm data. like, data type={buySell or roadSide}, create or update?
+router.post('/:itemType/', function(req, res, next){
+    // TODO: how to send data in textarea tag...
+    if(req.user){
+        if(req.params.itemType == "item"){// add buySell item to the database
+            console.log(req);
+            // var itemPromise = new Promise();
+            // validate data,
+
+        }else if(req.params.itemType == "roadside"){
+
+        }
+
+        console.log("logined");
+    }
     // TODO: step3: validate data(might be validate in client side, but double check is important)
     // TODO: step4: add data
     // TODO: step5: send success or false signal

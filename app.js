@@ -14,8 +14,15 @@ const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 const auth = require('./auth');
 
+// plugin added by user
+const expressValidator = require('express-validator');
+
+// route files
 const index = require('./routes/index');
 const item = require('./routes/item');
+const add = require('./routes/add');
+const edit = require('./routes/edit');
+
 const app = express();
 
 // view engine setup
@@ -50,6 +57,8 @@ app.use(
 );
 app.use(passport.initialize());
 app.use(passport.session());
+// to validate easily
+app.use(expressValidator());
 
 // TODO: MEMO! user is from here
 app.use(function(req, res, next) {
@@ -57,8 +66,13 @@ app.use(function(req, res, next) {
   res.locals.user = req.user;
   next();
 });
+
+// route use setting
 app.use('/', item);
 app.use('/', index);
+app.use('/add', add);
+app.use('/edit', edit);
+
 
 app.use('/', auth.router);
 
