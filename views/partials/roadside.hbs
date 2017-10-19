@@ -22,20 +22,20 @@
 
 
 				<div id="popUpForm" class="modal">
-			  <div class="modal-background"></div>
-			  <div class="modal-card">
-			    <header class="modal-card-head">
-			      <p class="modal-card-title">Add Details of road side item</p>
-				<button onclick="document.getElementById('popUpForm').style.display='none'" class="delete" aria-label="close"></button>
-			</header>
-				<section class="modal-card-body">
-					{{input "Item Name" "text" required=true placeHolder="put Item Name here."}}
-					{{input "Item Price" "text" required=true placeHolder="put Item Price here."  isNum=true}}
-					{{input "Item Description" "textarea"}}
-					<button class="button is-success" onclick="getMap">Pin Location</button>
+			    <div class="modal-background"></div>
+			    <div class="modal-card">
+			      <header class="modal-card-head">
+							<p class="modal-card-title">Add Details of road side item</p>
+							<button onclick="document.getElementById('popUpForm').style.display='none'" class="delete" aria-label="close"></button>
+						</header>
+						<section class="modal-card-body">
+							{{input "Item Name" "text" required=true placeHolder="put Item Name here."}}
+							{{input "Item Price" "text" required=true placeHolder="put Item Price here."  isNum=true}}
+							{{input "Item Description" "textarea"}}
+							<button class="button is-success" onclick="getMap">Pin Location</button>
 					<!--<div id="map" class="fullwidth"></div>
 					<div style="height:100px width=100px"> -->
-					<script>
+							<script>
 						// Note: This example requires that you consent to location sharing when
 						// prompted by your browser. If you see the error "The Geolocation service
 						// failed.", it means you probably did not give permission for the browser to
@@ -83,7 +83,7 @@
 					<script async defer
 									src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2qANG4wIu_lI71xIhZFLqa9-F3GX6lCk&libraries=places&callback=initMap">
 					</script> -->
-					<div id="map" class="fullwidth"></div>
+							<div id="map" class="fullwidth"></div>
 		<script async defer
 						src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2qANG4wIu_lI71xIhZFLqa9-F3GX6lCk&libraries=places&callback=initMap">
 		</script>
@@ -129,13 +129,12 @@
 				infoWindow.open(map);
 			}
 		</script>
-
-				</section>
-		    <footer class="modal-card-foot">
-		      <button class="button is-success">Save changes</button>
-		      <button class="button" onclick="document.getElementById('popUpForm').style.display='none'">Cancel</button>
-		    </footer>
-		  </div>
+						</section>
+						<footer class="modal-card-foot">
+		          <button class="button is-success">Save changes</button>
+		          <button class="button" onclick="document.getElementById('popUpForm').style.display='none'">Cancel</button>
+		        </footer>
+					</div>
 				</div>
 		</div>
 	</div>
