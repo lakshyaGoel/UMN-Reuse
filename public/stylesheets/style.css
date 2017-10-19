@@ -56,6 +56,13 @@ the css is completely overwrite,
 so if you write any css in style.css,
 completely delete what you do!
 */
+.lgWrap {
+  display: block !important; }
+
+.lgColumn {
+  display: inline-block;
+  width: 24% !important; }
+
 /*
 # How to use scss
 
