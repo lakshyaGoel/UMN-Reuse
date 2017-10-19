@@ -35,48 +35,45 @@ router.get('/:itemType/', function(req, res, next){
 router.post('/:itemType/', function(req, res, next){
     if(req.user){
         req.checkBody('itemName', 'Item name is blank! Fill out please.').notEmpty();
-        req.checkBody('itemPrice', 'Item price is illegal! Fill out number please!').matches(/\${0,1}\d+\.\d+/);
+        req.checkBody('itemPrice', 'Item price is illegal! Fill out number please!').not().matches(/\${0,1}\d+\.\d+/);
 
-        // TODO: step1: get user ID from User database
-        // TODO: step2: save itemdata to BuySell database
         // TODO: step3: if success, send success.
-
         if(req.params.itemType == "item"){// add buySell item to the database
-            // TODO: step2: save itemdata
-            function saveData(userId, formData){
-
+            function saveData(){
+                var BuySellItem = require("../model/buySellItem");
+                var item = new BuySellItem();
+                item.name = req.body.itemName;
+                item.description = req.body.description;
+                item.price = req.body.itemPrice;
+                item.userId = req.user.displayName;
+                return item.save(function(err){
+                    if(err){
+                        return false;
+                    }else{
+                        return true;
+                    }
+                });
             }
         }else if(req.params.itemType == "roadside"){
             //TODO: step2: save itemdata
-            function saveData(userId, formData){
+            function saveData(userMail, formData){
 
             }
         }
 
-        var promise = Promise.resolve();
-        // TODO: step1: get user ID from User database
-        function getCurrentUserId(){
-            var user = require("../model/user");
-            user.findOne().where({name: "user"}).exec(function(err, column){
-                if(err){
-
-                }
-
-                if(column){
-
-                }else{
-
-                }
-            });
-        }
         var errors = req.validationErrors();
-        console.log(errors);
         if(!errors){
-            // promise
-            //     .then(getCurrentUserId())
-            //     .then(saveData())
-            //     .then()
-            //     .catch();
+            var promise = Promise.resolve();
+            saveData()
+                .then(function(result){
+                    if(result){
+                        console.log("success!");
+                        res.redirect('/');
+                    }else{
+                        console.log("false");
+                        res.render("error");
+                    }
+                });
         }else{
 
         }
