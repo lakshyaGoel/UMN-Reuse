@@ -2,6 +2,50 @@
 <p>
 	This is views/partials/roadside.hbs
 
+	<script>
+	// Note: This example requires that you consent to location sharing when
+	// prompted by your browser. If you see the error "The Geolocation service
+	// failed.", it means you probably did not give permission for the browser to
+	// locate you.
+	var map, infoWindow;
+	// initialize Google Map API
+function initMap(){
+		map = new google.maps.Map(document.getElementById('map'), {
+				zoom: 14, center: {lat: 44.974, lng: -93.234}
+		});
+}
+
+		infoWindow = new google.maps.InfoWindow;
+
+		// Try HTML5 geolocation.
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(function(position) {
+				var pos = {
+					lat: position.coords.latitude,
+					lng: position.coords.longitude
+				};
+
+				infoWindow.setPosition(pos);
+				infoWindow.setContent('Location found.');
+				infoWindow.open(map);
+				map.setCenter(pos);
+			}, function() {
+				handleLocationError(true, infoWindow, map.getCenter());
+			});
+		} else {
+			// Browser doesn't support Geolocation
+			handleLocationError(false, infoWindow, map.getCenter());
+		}
+	}
+
+	function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+		infoWindow.setPosition(pos);
+		infoWindow.setContent(browserHasGeolocation ?
+													'Error: The Geolocation service failed.' :
+													'Error: Your browser doesn\'t support geolocation.');
+		infoWindow.open(map);
+	}
+</script>
 <script>
 // Get the modal
 var modal = document.getElementById('popUpForm');
@@ -24,33 +68,77 @@ window.onclick = function(event) {
 			</button>
 		</div>
 		<div class="column second-column">
-			<div id="popUpForm" class="modal"  style="background-color:hsl(120, 60%, 90%); position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);}">
-	<span onclick="document.getElementById('popUpForm').style.display='none'" class="delete" title="Close Modal">×</span>
-
+				<div id="popUpForm" class="modal">
+			  <div class="modal-background"></div>
+			  <div class="modal-card">
+			    <header class="modal-card-head">
+			      <p class="modal-card-title">Add Details of road side item</p>
+				<button onclick="document.getElementById('popUpForm').style.display='none'" class="delete" aria-label="close"></button>
+			</header>
+				<section class="modal-card-body">
 					{{input "Item Name" "text" required=true placeHolder="put Item Name here."}}
 					{{input "Item Price" "text" required=true placeHolder="put Item Price here."  isNum=true}}
 					{{input "Item Description" "textarea"}}
+					<button class="button is-success">Pin Location</button>
+					<!--<div id="map" class="fullwidth"></div>
+					<div style="height:100px width=100px">
+					<script>
+						// Note: This example requires that you consent to location sharing when
+						// prompted by your browser. If you see the error "The Geolocation service
+						// failed.", it means you probably did not give permission for the browser to
+						// locate you.
+						var map, infoWindow;
+						function getMap() {
+							map = new google.maps.Map(document.getElementById('map'), {
+								center: {lat: -34.397, lng: 150.644},
+								zoom: 6
+							});
+							infoWindow = new google.maps.InfoWindow;
+
+							// Try HTML5 geolocation.
+							if (navigator.geolocation) {
+								navigator.geolocation.getCurrentPosition(function(position) {
+									var pos = {
+										lat: position.coords.latitude,
+										lng: position.coords.longitude
+									};
+
+									infoWindow.setPosition(pos);
+									infoWindow.setContent('Location found.');
+									infoWindow.open(map);
+									map.setCenter(pos);
+								}, function() {
+									handleLocationError(true, infoWindow, map.getCenter());
+								});
+							} else {
+								// Browser doesn't support Geolocation
+								handleLocationError(false, infoWindow, map.getCenter());
+							}
+						}
+
+						function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+							infoWindow.setPosition(pos);
+							infoWindow.setContent(browserHasGeolocation ?
+																		'Error: The Geolocation service failed.' :
+																		'Error: Your browser doesn\'t support geolocation.');
+							infoWindow.open(map);
+						}
+					</script>
+					<script async defer
+					src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHlhlAslc3THDNUBE7HZ18Q5brP_dk950&callback=initMap">
+					</script> -->
+
 					<div id="map" class="fullwidth"></div>
+
 					<script async defer
 									src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2qANG4wIu_lI71xIhZFLqa9-F3GX6lCk&libraries=places&callback=initMap">
 					</script>
-					<div class="field is-horizontal">
-						<div class="field-label">
-							<!-- Left empty for spacing -->
-						</div>
-						<div class="field-body">
-							<div class="field">
-								<div class="control">
-									<button class="button is-primary">
-										Send message
-									</button>
-									<button class="button is-primary" onclick="document.getElementById('popUpForm').style.display='none'" class="cancelbtn">
-									Cancel
-								</button>
-								</div>
-							</div>
-						</div>
-					</div>
+				</section>
+		    <footer class="modal-card-foot">
+		      <button class="button is-success">Save changes</button>
+		      <button class="button" onclick="document.getElementById('popUpForm').style.display='none'">Cancel</button>
+		    </footer>
+		  </div>
 				</div>
 		</div>
 	</div>
