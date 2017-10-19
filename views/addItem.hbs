@@ -20,7 +20,7 @@ and The item id parameter specify item by id. use object id as item id.
 			{{!-- TODO:Photo submit? --}}
 				{{#if isRoadside}}
 				{{!--TODO: How to add location data? --}}
-					{{input "Location" "text" id="buySellItemName" required=true placeHolder="put Item Name here."}}
+					{{input "Location" "text" id="location" required=true placeHolder="put Item Name here."}}
 				{{/if}}
 			{{input "Item Description" "textarea"  id="buySellItemDescription" placeHolder="put item description here."}}
 			<a class="button is-success" id="itemFormSubmit">Save Items</a>

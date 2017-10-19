@@ -33,24 +33,55 @@ router.get('/:itemType/', function(req, res, next){
 
 /* POST home page. */
 router.post('/:itemType/', function(req, res, next){
-    // TODO: how to send data in textarea tag...
     if(req.user){
+        req.checkBody('itemName', 'Item name is blank! Fill out please.').notEmpty();
+        req.checkBody('itemPrice', 'Item price is illegal! Fill out number please!').matches(/\${0,1}\d+\.\d+/);
+
+        // TODO: step1: get user ID from User database
+        // TODO: step2: save itemdata to BuySell database
+        // TODO: step3: if success, send success.
+
         if(req.params.itemType == "item"){// add buySell item to the database
-            console.log(req);
-            // var itemPromise = new Promise();
-            // validate data,
+            // TODO: step2: save itemdata
+            function saveData(userId, formData){
 
+            }
         }else if(req.params.itemType == "roadside"){
+            //TODO: step2: save itemdata
+            function saveData(userId, formData){
 
+            }
         }
 
-        console.log("logined");
-    }
-    // TODO: step3: validate data(might be validate in client side, but double check is important)
-    // TODO: step4: add data
-    // TODO: step5: send success or false signal
-    // TODO: step6(client side): show success/false message
+        var promise = Promise.resolve();
+        // TODO: step1: get user ID from User database
+        function getCurrentUserId(){
+            var user = require("../model/user");
+            user.findOne().where({name: "user"}).exec(function(err, column){
+                if(err){
 
+                }
+
+                if(column){
+
+                }else{
+
+                }
+            });
+        }
+        var errors = req.validationErrors();
+        console.log(errors);
+        if(!errors){
+            // promise
+            //     .then(getCurrentUserId())
+            //     .then(saveData())
+            //     .then()
+            //     .catch();
+        }else{
+
+        }
+    }
+    // TODO: step6(client side): show success/false message
     // TODO: Must use Promise()! It is better than callback chain.
 });
 
