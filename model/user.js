@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 mongoose.connect(process.env.DB_URI);
 
 var userSchema = new Schema({
-    id:Schema.Types.ObjectId,
+    id: Schema.Types.ObjectId,
     name: String,
     email: {
         type:String,
