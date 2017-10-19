@@ -3,7 +3,11 @@ const debug = require('debug')('app:auth');
 const express = require('express');
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
+var mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
+// should use constant defined in .env
+mongoose.connect(process.env.DB_URI);
 debug(`auth0: domain=${process.env.AUTH0_DOMAIN}`)
 
 passport.use(new Auth0Strategy(
@@ -14,7 +18,7 @@ passport.use(new Auth0Strategy(
     callbackURL: process.env.AUTH0_CALLBACK_URL
   },
   (accessToken, refreshToken, extraParams, profile, done) => {
-    debug("auth0 strategy callback; profile: " + JSON.stringify(profile, null, 4));
+    //debug("auth0 strategy callback; profile: " + JSON.stringify(profile, null, 4));
     return done(null, profile);
   }
 ));
@@ -26,8 +30,36 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(user, done) {
-  debug("auth0 deserialize user: " + JSON.stringify(user, null, 4));
-  done(null, user);
+    //debug("auth0 deserialize user: " + JSON.stringify(user, null, 4));
+    //var userEmail = "max@herper.umn";
+    var userEmail = user.displayName;
+    var userName = user.nickname;
+    var User = require("./model/user");
+    var flag = false;
+    User.find({'email':userEmail})
+        .then(function(result){
+            if(!result.length){
+                console.log("IN INSERT");
+                flag = true;
+            }else{
+                flag = false;
+            }
+    });
+    
+    var User = require("./model/user");
+            if(flag){
+                console.log("YEAHHHHHH");
+                User.insert({
+                    "name" : userName,
+                    "email" : userEmail
+                }).then(function(result){
+                    console.log("YEAHHHHHH AGAIN");
+                    console.log(result);
+                });
+            }else{
+                console.log("NOOOOOOOOOOOOO");
+            }
+    done(null, user);
 });
 
 // login/logout routes
