@@ -3,6 +3,15 @@ var router = express.Router();
 
 router.get('/', function(req, res, next){
     var Item = require("../model/buySellItem");
+    // the code for add test buy sell test data
+    // for(var i = 0; i < 20; i++){
+    //     var item = new Item();
+    //     item.name = "Pen " + i;
+    //     item.description = "This is a Pen " + i;
+    //     item.price = i;
+    //     item.userId = req.user._id;
+    //     item.save();
+    // }
     Item.find().exec(function(err, column){
         var isLoggedIn;
         var userID;
