@@ -39,26 +39,23 @@ passport.deserializeUser(function(user, done) {
     User.find({'email':userEmail})
         .then(function(result){
             if(!result.length){
-                console.log("IN INSERT");
                 flag = true;
             }else{
                 flag = false;
             }
+            return flag;
+    }).then(function(flag){
+        var User = require("./model/user");
+        if(flag){
+            var user = new User();
+            user.name = userName;
+            user.email = userEmail;
+            user.save();
+        }else{
+        }
     });
     
-    var User = require("./model/user");
-            if(flag){
-                console.log("YEAHHHHHH");
-                User.insert({
-                    "name" : userName,
-                    "email" : userEmail
-                }).then(function(result){
-                    console.log("YEAHHHHHH AGAIN");
-                    console.log(result);
-                });
-            }else{
-                console.log("NOOOOOOOOOOOOO");
-            }
+
     done(null, user);
 });
 
