@@ -35,7 +35,7 @@ router.get('/:itemType/', function(req, res, next){
 router.post('/:itemType/', function(req, res, next){
     if(req.user){
         req.checkBody('itemName', 'Item name is blank! Fill out please.').notEmpty();
-        req.checkBody('itemPrice', 'Item price is illegal! Fill out number please!').not().matches(/\${0,1}\d+\.\d+/);
+        //req.checkBody('itemPrice', 'Item price is illegal! Fill out number please!');
 
         // TODO: step3: if success, send success.
         if(req.params.itemType == "item"){// add buySell item to the database
@@ -62,10 +62,13 @@ router.post('/:itemType/', function(req, res, next){
         }
 
         var errors = req.validationErrors();
+        console.log("error",errors);
         if(!errors){
+            console.log("save start");
             var promise = Promise.resolve();
             saveData()
                 .then(function(result){
+                    console.log("save result: " + result);
                     if(result){
                         console.log("success!");
                         res.redirect('/');

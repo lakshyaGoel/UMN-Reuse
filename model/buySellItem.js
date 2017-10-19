@@ -16,7 +16,8 @@ var buySellItem = new mongoose.Schema({
     photo: [],
     description: String,
     price: Number,
-    userId: String
+    userId: String,
+    interested: []
 });
 
 module.exports = mongoose.model("BuySellItem", buySellItem);
