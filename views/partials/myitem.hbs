@@ -1,31 +1,28 @@
-<h1>姿形も十人十色だから惹かれあうの〜</h1>
-<p>
-	This is views/partials/myitem.hbs
-<hr>
-<h2 class="subtitle">Form Example</h2>
-<p>
-	Detail of { { input } } is in functions.js. Check it out! Also, check following html(input tag).
-	You could easily understand that.
-
-</p>
-<div class="form-example">
-	{{input "Item Name" "text" required=true placeHolder="put Item Name here."}}
-	{{input "Item Price" "text" required=true placeHolder="put Item Price here."  isNum=true}}
-	{{input "Item Description" "textarea"}}
-
-	<div class="field is-horizontal">
-		<div class="field-label">
-			<!-- Left empty for spacing -->
-		</div>
-		<div class="field-body">
-			<div class="field">
-				<div class="control">
-					<button class="button is-primary">
-						Send message
-					</button>
-				</div>
-			</div>
-		</div>
+<div class="modal" id="addItem">
+	<div class="modal-background">
+	</div>
+	<div class="modal-card" id="addItemModalCard">
+		<header class="modal-card-head">
+			<p class="modal-card-title">Add Selling Item</p>
+			<button class="delete" aria-label="close" id="closeAddItemModal"></button>
+		</header>
+		<section class="modal-card-body">
+			{{input "Item Name" "text" id="buySellItemName" required=true placeHolder="put Item Name here."}}
+			{{input "Item Price" "text" id="buySellItemPrice" required=true placeHolder="put Item Price here."  isNum=true}}
+			{{input "Item Description" "textarea"  id="buySellItemDescription" placeHolder="put item description here."}}
+		</section>
+		<footer class="modal-card-foot">
+			<button class="button is-success">Save Items</button>
+			<button class="button">Cancel</button>
+		</footer>
 	</div>
 </div>
+<div class="">
+
+	<button class="button is-success" id="openItemModal">Add selling Item</button>
+</div>
+<div class="section">
+
+</div>
+
 </p>

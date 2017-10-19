@@ -1,0 +1,22 @@
+{{!--
+This page is add item page.
+We use this page for any item(buySell/Roadside)
+We also use this page for edit(update) item.
+
+The way to use this page is, first send item parameters set.
+The item parameters set has two parameter: itemtype parameter and item id.
+The itemtype parameter is only 2 value ("item", "roadside")
+This parameter specify the item's type. "item" means buySell item, and "roadside" mean Roadside item
+
+and The item id parameter specify item by id. use object id as item id.
+--}}
+{{input "Item Name" "text" required=true placeHolder="put Item Name here."}}
+{{input "Item Price" "text" required=true placeHolder="put Item Price here."  isNum=true}}
+{{!-- TODO:Photo submit? --}}
+{{input "Item Description" "textarea"  id="buySellItemDescription" placeHolder="put item description here."}}
+{{#if roadside}}
+	{{!--TODO: How to add location data? --}}
+	{{input "Location" "text" id="buySellItemName" required=true placeHolder="put Item Name here."}}
+{{/if}}
+<button class="button is-success">Save Items</button>
+<button class="button">Cancel</button>
