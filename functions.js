@@ -62,7 +62,7 @@ module.exports.hbsHelper = function(){
 
             var input = '<input class="input ' + additionalClassName + '" type="text" id="' + label + '" '+ 'name="' + label + '"' + placeHolder + '>';
             if(type == "textarea"){
-                input = '<textarea class="textarea' + additionalClassName + '" id="' + label + '" '+ placeHolder + '></textarea>';
+                input = '<textarea class="textarea' + additionalClassName + '" id="' + label + '" '+ + 'name="' + label + '"' + placeHolder + '></textarea>';
             }
 
             return new hbs.SafeString(

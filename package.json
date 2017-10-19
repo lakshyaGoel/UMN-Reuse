@@ -17,6 +17,7 @@
     "express-hbs": "^1.0.4",
     "express-mongo-db": "^2.0.3",
     "express-session": "^1.15.6",
+    "express-validator": "^4.2.1",
     "hbs": "~4.0.1",
     "mongoose": "^4.12.3",
     "morgan": "~1.8.1",

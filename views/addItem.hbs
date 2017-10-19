@@ -10,13 +10,22 @@ This parameter specify the item's type. "item" means buySell item, and "roadside
 
 and The item id parameter specify item by id. use object id as item id.
 --}}
-{{input "Item Name" "text" required=true placeHolder="put Item Name here."}}
-{{input "Item Price" "text" required=true placeHolder="put Item Price here."  isNum=true}}
-{{!-- TODO:Photo submit? --}}
-{{input "Item Description" "textarea"  id="buySellItemDescription" placeHolder="put item description here."}}
-{{#if roadside}}
-	{{!--TODO: How to add location data? --}}
-	{{input "Location" "text" id="buySellItemName" required=true placeHolder="put Item Name here."}}
-{{/if}}
-<button class="button is-success">Save Items</button>
-<button class="button">Cancel</button>
+<main class="main">
+	<article>
+		<section class="section">
+			<h1 class="subtitle">Add new selling item</h1>
+			<form  action="/add/{{itemType}}" method="post" id="itemForm">
+			{{input "Item Name" "text" id="itemName" required=true placeHolder="put Item Name here."}}
+			{{input "Item Price" "text" id="itemPrice" required=true placeHolder="put Item Price here."  isNum=true}}
+			{{!-- TODO:Photo submit? --}}
+				{{#if isRoadside}}
+				{{!--TODO: How to add location data? --}}
+					{{input "Location" "text" id="buySellItemName" required=true placeHolder="put Item Name here."}}
+				{{/if}}
+			{{input "Item Description" "textarea"  id="buySellItemDescription" placeHolder="put item description here."}}
+			<a class="button is-success" id="itemFormSubmit">Save Items</a>
+			<a class="button">Cancel</a>
+			</form>
+		</section>
+	</article>
+</main>
