@@ -1,6 +1,8 @@
 $(function(){
     console.log('local.js ready');
-
+    //interested items
+      $('#interestedModal').click(function(){
+      $.post("/interested", {userid:"54321"})  });
     // Begin: tab control
     $(".switch-BuySell, .switch-Roadside, .switch-MyItems").on("click", function(){
         var label = $(this).attr("class").replace("switch-", "");
@@ -52,4 +54,3 @@ $(function(){
         return result;
     }
 });
-

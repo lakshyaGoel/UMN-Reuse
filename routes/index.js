@@ -79,6 +79,7 @@ router.get('/', function(req, res, next){
 
         });
 
+
     /**
      * Basic find(select) operation part2
      *
@@ -125,5 +126,15 @@ router.get('/', function(req, res, next){
      * But if you need that, I ganna tell you.
      */
 });
+
+
+
+/*myitems*/
+router.post("/interested",function(req, res){
+  console.log("user id"+req.body.userid);
+  res.render('partials/myitem', {u_id: 'req.body.userid'});
+
+});
+
 
 module.exports = router;
