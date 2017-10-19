@@ -51,24 +51,5 @@ $(function(){
         }
         return result;
     }
-
-    // from CSCI4313 homework3
-    // initialize Google Map API
-    function initMap(){
-        map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 14, center: {lat: 44.974, lng: -93.234}
-        });
-    }
-
-    $(window).on('load resize', function(){
-        initMap();
-    });
-    $(".switch-Roadside").on("click", function(){
-        initMap();
-    });
-
-    // Lakshya
-
-
 });
 
