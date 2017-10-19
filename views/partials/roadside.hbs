@@ -1,28 +1,59 @@
 <h1>今日もドッタンバッタン大騒ぎ！</h1>
 <p>
 	This is views/partials/roadside.hbs
+
+<script>
+// Get the modal
+var modal = document.getElementById('popUpForm');
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
 </p>
 
 <p>
-	<div class="form-example">
-		{{input "Item Name" "text" required=true placeHolder="put Item Name here."}}
-		{{input "Item Price" "text" required=true placeHolder="put Item Price here."  isNum=true}}
-		{{input "Item Description" "textarea"}}
+	<div class="columns">
+		<div class="column first-column">
+			<button class="button is-primary" id="popUpButton" onclick="document.getElementById('popUpForm').style.display='block'">
+				+
+			</button>
+		</div>
+		<div class="column second-column">
+			<div id="popUpForm" class="modal"  style="background-color:hsl(120, 60%, 90%); position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);}">
+	<span onclick="document.getElementById('popUpForm').style.display='none'" class="delete" title="Close Modal">×</span>
 
-		<div class="field is-horizontal">
-			<div class="field-label">
-				<!-- Left empty for spacing -->
-			</div>
-			<div class="field-body">
-				<div class="field">
-					<div class="control">
-						<button class="button is-primary">
-							Send message
-						</button>
+					{{input "Item Name" "text" required=true placeHolder="put Item Name here."}}
+					{{input "Item Price" "text" required=true placeHolder="put Item Price here."  isNum=true}}
+					{{input "Item Description" "textarea"}}
+					<div id="map" class="fullwidth"></div>
+					<script async defer
+									src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2qANG4wIu_lI71xIhZFLqa9-F3GX6lCk&libraries=places&callback=initMap">
+					</script>
+					<div class="field is-horizontal">
+						<div class="field-label">
+							<!-- Left empty for spacing -->
+						</div>
+						<div class="field-body">
+							<div class="field">
+								<div class="control">
+									<button class="button is-primary">
+										Send message
+									</button>
+									<button class="button is-primary" onclick="document.getElementById('popUpForm').style.display='none'" class="cancelbtn">
+									Cancel
+								</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 	</div>
+
 
 </p>
