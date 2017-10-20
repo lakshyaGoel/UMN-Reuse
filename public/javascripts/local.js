@@ -86,5 +86,5 @@ $(function(){
         }).fail(function(xhr, status, error){
            alert(status);
         });
-    })
+    });
 });
