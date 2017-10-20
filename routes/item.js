@@ -4,7 +4,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/', function(req, res, next){
     var Item = require("../model/buySellItem");
-    
+
     var pitem;
      var userID;
      if(req.user){
@@ -19,7 +19,7 @@ router.get('/', function(req, res, next){
             if(column){
               pitem = JSON.parse(JSON.stringify(column));
        }
- 
+
      });
     Item.find().exec(function(err, column){
         var isLoggedIn;
@@ -105,5 +105,21 @@ router.post('/item-delete',function(req, res){
         });
 
 });
+router.post('/item-interested',function(req, res){
+    var BuySellItem = require("../model/buySellItem");
+    var userID;
+    if(req.user){
+        userID = req.user.displayName;
+    }else{
+        userID = "NA";
+    }
+    BuySellItem.find({"_id": ObjectId(req.body.id)})
+         .then(function(column){
+          //  var result = column["interested"];
+          //  console.log("DATA::: " + result);
+          var result = '<p>' + column + '</p>';
+          res.render('partials/myitem.hbs', {data : result});
+         })
 
+});
 module.exports = router;
