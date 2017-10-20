@@ -19,6 +19,11 @@ router.get('/', function(req, res, next){
             var a = JSON.parse(JSON.stringify(x));
             a["loggedIn"] = isLoggedIn;
             a["userEmailID"] = userID;
+            if(a.interested.indexOf(req.user.displayName) != -1){
+                a["savedFlg"] = true;
+            }else{
+                a["savedFlg"] = false;
+            }
             var flag = false;
             if(userID == a["userId"]){
                 flag = true;

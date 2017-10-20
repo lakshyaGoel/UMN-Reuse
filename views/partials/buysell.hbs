@@ -31,7 +31,9 @@
                     {{#if loggedIn}}
                         <footer class="card-footer">
                             {{#unless isUser}}
-                                <a href="#" class="card-footer-item item-save">Save</a>
+                                <a href="#" class="card-footer-item item-save">
+	                                {{#if savedFlg}}Saved{{else}}Save{{/if}}
+                                  </a>
                             {{/unless}}
                             {{#if isUser}}
                                 <a href="#" class="card-footer-item item-delete">Delete</a>
