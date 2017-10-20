@@ -63,6 +63,7 @@ router.post('/:itemType/', function(req, res, next){
                 item.name = req.body.itemName;
                 item.description = req.body.description;
                 item.userId = req.user.displayName;
+                console.log(req.body);
                 var addLocation = {
                     "type": "Point",
                     "coordinates": [req.body.lat, req.body.lon]
