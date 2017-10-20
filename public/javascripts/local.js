@@ -54,7 +54,7 @@ $(function(){
         return result;
     }
 
-    // to save and delete
+    // item save
     $(".item-save").on("click", function(){
         var itemId = $(this).parent().find(".itemID").text();
         var $item = $(this);
@@ -71,4 +71,21 @@ $(function(){
             alert(status);
         });
     });
+
+    // item delete
+    $(".item-delete").on("click", function(){
+        var itemId = $(this).parent().find(".itemID").text();
+        var $item = $(this);
+        $.ajax({
+            async:false,
+            url:'/item-delete',
+            type: 'post',
+            data:{"id": itemId},
+            dataType: 'json',
+        }).done(function(res){
+            window.location.href = "/";
+        }).fail(function(xhr, status, error){
+           alert(status);
+        });
+    })
 });
