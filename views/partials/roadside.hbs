@@ -1,17 +1,30 @@
+<script>
+function proceed () {
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', 'add/roadside');
+    form.style.display = 'hidden';
+    document.body.appendChild(form)
+    form.submit();
+}
+</script>
+
 <p>
-	<div class="columns">
-		<div class="column first-column">
-			<button class="button is-primary" id="popUpButton" onclick="document.getElementById('popUpForm').style.display='block'">
-				+
+	<div class="rows">
+		<div class="row first-row">
+			<button class="button is-primary" id="popUpButton" onclick="document.getElementById('popUpFormRS').style.display='block'">
+				+ Add Item
 			</button>
+			<br>
+			<br>
 		</div>
-		<div class="column second-column">
-				<div id="popUpForm" class="modal">
+		<div class="row second-row">
+				<div id="popUpFormRS" class="modal">
 				  <div class="modal-background"></div>
 				  <div class="modal-card">
 				    <header class="modal-card-head">
 				      <p class="modal-card-title">Add Details of road side item</p>
-							<button onclick="document.getElementById('popUpForm').style.display='none'" class="delete" aria-label="close"></button>
+							<button onclick="document.getElementById('popUpFormRS').style.display='none'" class="delete" aria-label="close"></button>
 						</header>
 						<section class="modal-card-body">
 							{{input "Item Name" "text" required=true placeHolder="put Item Name here."}}
@@ -50,11 +63,52 @@
 							</script>
 						</section>
 				    <footer class="modal-card-foot">
-				      <button class="button is-success">Save changes</button>
-				      <button class="button" onclick="document.getElementById('popUpForm').style.display='none'">Cancel</button>
+				      <button class="button is-success" onclick="proceed()">Save changes</button>
+				      <button class="button" onclick="document.getElementById('popUpFormRS').style.display='none'">Cancel</button>
 				    </footer>
 			  	</div>
 				</div>
-		</div>
+					<div class="columns lgWrap">
+								{{#each items}}
+										<div class="column is-one-third lgColumn">
+												<div class="card">
+														<div class="card-image">
+																<figure class="image is-4by3">
+																		<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+																</figure>
+														</div>
+														<header class="card-header">
+																<p class="card-header-title">
+																		{{name}}
+																</p>
+																<a href="#" class="card-header-icon" aria-label="more options">
+																	<span class="icon">
+																		<i class="fa fa-angle-down" aria-hidden="true"></i>
+																	</span>
+																</a>
+														</header>
+														<div class="card-content">
+																<div class="content">
+																		{{description}}
+																		<br>
+																		<span class="location">{{location}}</span>
+																</div>
+														</div>
+														{{#if loggedIn}}
+																<footer class="card-footer">
+																		{{#unless isUser}}
+																				<a href="#" class="card-footer-item">Save</a>
+																		{{/unless}}
+																		{{#if isUser}}
+																				<a href="#" class="card-footer-item">Delete</a>
+																		{{/if}}
+																</footer>
+														{{/if}}
+												</div>
+										</div>
+								{{/each}}
+						</div>
+				</div>
+		
 	</div>
 </p>
