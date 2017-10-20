@@ -42,6 +42,16 @@ router.post('/item-save',function(req, res){
     console.log('body: ' + JSON.stringify(req.body.id));
     var BuySellItem = require("../model/buySellItem");
     BuySellItem.findOne({"_id": ObjectId(req.body.id), "interested":{$nin: [req.user.displayName]}}).exec(function(err, column){
+        // TODO: fix it to enable saved => save. now only use could do save => saved
+        /**
+         * what I mean is
+         * now user can put interested label, but user cannot remove interested label.
+         * I think user need this functionality.
+         *
+         * To do that, first, remove "interested":{$nin: [req.user.displayName]} of line44 of this code
+         * and confirm labeled or not inside exec() function.
+         * Also, need a fix to local.js $.ajax part.
+         */
         if(err){
         }
         console.log(column);
