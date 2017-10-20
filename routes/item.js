@@ -54,10 +54,21 @@ router.get('/', function(req, res, next){
             items: itemData,
             personalitems: pitem
         });
+
+    }).then(function(result){
+        // RSItem.find().exec(function(err, column){
+        //     console.log("load data from roadsideDatabase");
+        //     console.log(column);
+        //
+        // });
+        res.render('index.hbs', {
+            items: itemData,
+            personalitems: pitem
+        });
+    }).catch(function(err){
+        console.log("run erro?");
     });
-    RSItem.find().exec(function(err, column){
-        console.log(column);
-    });
+
 });
 
 router.post('/item-save',function(req, res){
