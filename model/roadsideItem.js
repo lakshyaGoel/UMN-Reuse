@@ -15,10 +15,7 @@ var roadsideItem = new mongoose.Schema({
     },
     userId: String,
     description: String,
-    location: {
-      type: String,
-      coordinates:[]
-    },
+    location: [],
     photo: []
 });
 

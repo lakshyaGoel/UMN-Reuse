@@ -55,9 +55,30 @@ router.post('/:itemType/', function(req, res, next){
                 });
             }
         }else if(req.params.itemType == "roadside"){
-            //TODO: step2: save itemdata
-            function saveData(userMail, formData){
 
+            //TODO: step2: save itemdata
+            function saveData(){
+                var RoadSideItem = require("../model/roadsideItem");
+                var item = new RoadSideItem();
+                item.name = req.body.itemName;
+                item.description = req.body.description;
+                item.userId = req.user.displayName;
+                var addLocation = {
+                    "type": "Point",
+                    "coordinates": [req.body.lat, req.body.lon]
+                };
+
+                item.location["type"] = "Point";
+                item.location.push(addLocation);
+                console.log("start req.body");
+                console.log(req.body);
+                return item.save(function(err){
+                    if(err){
+                        return false;
+                    }else{
+                        return true;
+                    }
+                });
             }
         }
 
