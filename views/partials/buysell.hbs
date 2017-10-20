@@ -31,11 +31,12 @@
                     {{#if loggedIn}}
                         <footer class="card-footer">
                             {{#unless isUser}}
-                                <a href="#" class="card-footer-item">Save</a>
+                                <a href="#" class="card-footer-item item-save">Save</a>
                             {{/unless}}
                             {{#if isUser}}
-                                <a href="#" class="card-footer-item">Delete</a>
+                                <a href="#" class="card-footer-item item-delete">Delete</a>
                             {{/if}}
+	                        <span class="is-hidden itemID">{{_id}}</span>
                         </footer>
                     {{/if}}
                 </div>

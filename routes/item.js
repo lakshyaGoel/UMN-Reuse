@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/', function(req, res, next){
     var Item = require("../model/buySellItem");
@@ -30,4 +31,31 @@ router.get('/', function(req, res, next){
         });
     });
 });
+
+router.post('/item-save',function(req, res){
+    var obj = {};
+    console.log('body: ' + JSON.stringify(req.body.id));
+    var BuySellItem = require("../model/buySellItem");
+    BuySellItem.findOne({"_id": ObjectId(req.body.id), "interested":{$nin: [req.user.displayName]}}).exec(function(err, column){
+        if(err){
+        }
+        console.log(column);
+        var result = JSON.stringify({"save-result": false});
+        if(column){
+           column.interested.push(req.user.displayName);
+            column.save(function(err){
+                if(err){
+                }else{
+                    result = JSON.stringify({"save-result": true});
+                }
+                res.send(result);
+            });
+        }else{
+            res.send(result);
+
+        }
+    });
+});
+
+
 module.exports = router;
