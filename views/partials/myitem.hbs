@@ -1,131 +1,36 @@
-<div class="modal" id="addItem">
-	<div class="modal-background">
-	</div>
-	<div class="modal-card" id="addItemModalCard">
-		<header class="modal-card-head">
-			<p class="modal-card-title">People Interested In Your Item</p>
-			<button class="delete" aria-label="close" id="closeAddItemModal"></button>
-		</header>
-		<section class="modal-card-body">
-			<p>This is a sample modal box that can be created using the powers of CSS3.</p>
-			<p>You could do a lot of things here like have a pop-up ad that shows when your website loads, or create a login/register form for users.</p>
-			<p>This modal is from bulma. Read the <a href="https://bulma.io/documentation/components/modal/"><strong>document page.</strong></a></p>
-			<p>Also, I add code for this modal to work proper. This modal could close by close button which is on top of the modal, and also, This modal could close when you click outside of the modal.</p>
-			<p>Again, <span style="font-size:24px; font-weight:700; color:red;">Please, please read the document.</span></p>
-			<p style="font-size:48px; color:red; font-weight:900;">Also, read the code(public/javascripts/local.js) Carefully</p>
+<div class="columns lgWrap">
+<header>My Items</header>
+      {{#each personalitems}}
+          <div class="column is-one-third lgColumn">
+              <div class="card">
+                  <div class="card-image">
+                      <figure class="image is-4by3">
+                          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                      </figure>
+                  </div>
+                  <header class="card-header">
+                      <p class="card-header-title">
+                          {{name}}
+                      </p>
+                      <a href="#" class="card-header-icon" aria-label="more options">
+                        <span class="icon">
+                          <i class="fa fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                      </a>
+                  </header>
+                  <div class="card-content">
+                      <div class="content">
+                          {{description}}
 
-		</section>
-		<footer class="modal-card-foot">
-			<button class="button is-success">Save Items</button>
-			<button class="button">Cancel</button>
-		</footer>
-	</div>
-</div>
+                          <span class="price">${{price}}</span>
+                      </div>
+                  </div>
 
+                      <footer class="card-footer">
+                          <a id="#" class="card-footer-item"><span class="deleteFunction" id="delete_{{this._id}}">Delete</span></a>
+                      </footer>
 
-<div class="columns">
-	<div class="column">
-		My Items
-		<div class="column is-half">
-			<div class="card">
-				<div class="card-image">
-					<figure class="image is-4by3">
-						<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-					</figure>
-				</div>
-				<header class="card-header">
-					<p class="card-header-title">
-						Apple
-					</p>
-					<a href="#" class="card-header-icon" aria-label="more options">
-      				<span class="icon">
-        			<i class="fa fa-angle-down" aria-hidden="true"></i>
-      				</span>
-					</a>
-				</header>
-				<footer class="card-footer">
-					<a class="card-footer-item" id="openItemModal"> Interested</a>
-					<a href="#" class="card-footer-item">Edit</a>
-					<a href="#" class="card-footer-item">Delete</a>
-					<div id="interestedModal" class="modalDialog">
-
-						<div>	<a href="#close" title="Close" class="close">X</a>
-
-							<h2>People Interested In Your Item {{u_id}}</h2>
-							<script>"{{u_id}}"</script>
-							<p>This is a sample modal box that can be created using the powers of CSS3.</p>
-							<p>You could do a lot of things here like have a pop-up ad that shows when your website loads, or create a login/register form for users.</p>
-
-						</div>
-						</div>
-
-				</footer>
-
-			</div>
-			<br>
-			<div class="card">
-				<div class="card-image">
-					<figure class="image is-4by3">
-						<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-					</figure>
-				</div>
-				<header class="card-header">
-					<p class="card-header-title">
-						Apple
-					</p>
-					<a href="#" class="card-header-icon" aria-label="more options">
-      				<span class="icon">
-        			<i class="fa fa-angle-down" aria-hidden="true"></i>
-      				</span>
-					</a>
-				</header>
-				<div class="card-content">
-					<div class="content">
-						This is a apple.
-						<br>
-						<span class="price">$10</span>
-					</div>
-				</div>
-				<footer class="card-footer">
-					<a href="#" class="card-footer-item">Save</a>
-					<a href="#" class="card-footer-item">Edit</a>
-					<a href="#" class="card-footer-item">Delete</a>
-				</footer>
-			</div>
-		</div>
-	</div>
-	<div class="column">
-		Items You Are Interested In
-		<div class="column is-half">
-			<div class="card">
-				<div class="card-image">
-					<figure class="image is-4by3">
-						<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-					</figure>
-				</div>
-				<header class="card-header">
-					<p class="card-header-title">
-						Apple
-					</p>
-					<a href="#" class="card-header-icon" aria-label="more options">
-      				<span class="icon">
-        			<i class="fa fa-angle-down" aria-hidden="true"></i>
-      				</span>
-					</a>
-				</header>
-				<div class="card-content">
-					<div class="content">
-						This is a apple.
-						<br>
-						<span class="price">$10</span>
-					</div>
-				</div>
-				<footer class="card-footer">
-					<a href="#" class="card-footer-item">Save</a>
-					<a href="#" class="card-footer-item">Edit</a>
-					<a href="#" class="card-footer-item">Delete</a>
-				</footer>
-			</div>
-		</div>
-	</div>
-</div>
+              </div>
+          </div>
+      {{/each}}
+  </div>
