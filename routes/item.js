@@ -41,7 +41,7 @@ router.post('/item-save',function(req, res){
     var obj = {};
     console.log('body: ' + JSON.stringify(req.body.id));
     var BuySellItem = require("../model/buySellItem");
-    BuySellItem.findOne({"_id": ObjectId(req.body.id), "interested":{$nin: [req.user.displayName]}}).exec(function(err, column){
+    BuySellItem.findOne({"_id": ObjectId(req.body.id)}).exec(function(err, column){
         // TODO: fix it to enable saved => save. now only use could do save => saved
         /**
          * what I mean is
@@ -54,19 +54,24 @@ router.post('/item-save',function(req, res){
          */
         if(err){
         }
-        console.log(column);
-        var result = JSON.stringify({"save-result": false});
+        var result = {"save-result": false};
         if(column){
-           column.interested.push(req.user.displayName);
+            if(column.interested.indexOf(req.user.displayName) != -1){// already saved
+                column.interested.splice( column.interested.indexOf(req.user.displayName), 1 ) ;
+                result.act = "unsave";
+            }else{// not saved yet
+                column.interested.push(req.user.displayName);
+                result.act = "save";
+            }
             column.save(function(err){
                 if(err){
                 }else{
-                    result = JSON.stringify({"save-result": true});
+                    result = result["save-result"] = true;
                 }
-                res.send(result);
+                res.send(JSON.stringify(result));
             });
         }else{
-            res.send(result);
+            res.send(JSON.stringify(result));
         }
     });
 });

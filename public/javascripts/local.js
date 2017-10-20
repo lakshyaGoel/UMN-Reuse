@@ -65,8 +65,7 @@ $(function(){
             data:{"id": itemId},
             dataType: 'json'
         }).done(function(res){
-            console.debug(res);
-            $item.text("Saved");
+            window.location.href = "/";
         }).fail(function(xhr, status, error){
             alert(status);
         });
