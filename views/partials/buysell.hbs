@@ -1,48 +1,97 @@
-<div class="main">
-	<section class="section">
-	<a href="./add/item" class="button is-success">Add Selling Item</a>
-	</section>
-	<div class="columns lgWrap">
-        {{#each items}}
-            <div class="column is-one-third lgColumn">
-                <div class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                        </figure>
-                    </div>
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            {{name}}
-                        </p>
-                        <a href="#" class="card-header-icon" aria-label="more options">
-                          <span class="icon">
-                            <i class="fa fa-angle-down" aria-hidden="true"></i>
-                          </span>
-                        </a>
-                    </header>
-                    <div class="card-content">
-                        <div class="content">
-                            {{description}}
-                            <br>
-                            <span class="price">${{price}}</span>
-                        </div>
-                    </div>
-                    {{#if loggedIn}}
-                        <footer class="card-footer">
-                            {{#unless isUser}}
-                                <a href="#" class="card-footer-item item-save">
-	                                {{#if savedFlg}}Saved{{else}}Save{{/if}}
-                                  </a>
-                            {{/unless}}
-                            {{#if isUser}}
-                                <a href="#" class="card-footer-item item-delete">Delete</a>
-                            {{/if}}
-	                        <span class="is-hidden itemID">{{_id}}</span>
-                        </footer>
-                    {{/if}}
-                </div>
-            </div>
-        {{/each}}
-    </div>
-</div>
+
+<script>
+function proceedBS () {
+    var form = document.createElement('form');
+    form.setAttribute('method', 'post');
+    form.setAttribute('action', 'add/item');
+    form.style.display = 'hidden';
+    document.body.appendChild(form)
+    form.submit();
+}
+</script>
+<p>
+
+	<div class="rows">
+		<div class="row first-row">
+			<button class="button is-primary" id="popUpButton" onclick="document.getElementById('popUpFormBS').style.display='block'">
+				+ Add Item
+			</button>
+			<br>
+			<br>
+		</div>
+		<div class="row second-row">
+			<div id="popUpFormBS" class="modal">
+				<div class="modal-background"></div>
+				<div class="modal-card">
+					<header class="modal-card-head">
+						<p class="modal-card-title">Add Details of road side item</p>
+						<button onclick="document.getElementById('popUpFormBS').style.display='none'" class="delete" aria-label="close"></button>
+					</header>
+					<section class="modal-card-body">
+						<form  action="./add/item" method="post" id="itemForm">
+						{{input "Item Name" "text" id="itemName" required=true placeHolder="put Item Name here."}}
+						{{input "Item Price" "text" id="itemPrice" required=true placeHolder="put Item Price here."  isNum=true}}
+						{{!-- TODO:Photo submit? --}}
+							{{#if isRoadside}}
+							{{!--TODO: How to add location data? --}}
+								{{input "Location" "text" id="location" required=true placeHolder="put Item Name here."}}
+							{{/if}}
+						{{input "Item Description" "textarea"  id="description" placeHolder="put item description here."}}
+						<a class="button is-success" id="itemFormSubmit">Save Items</a>
+						<a class="button">Cancel</a>
+						</form>
+					</section>
+					<footer class="modal-card-foot">
+						<button class="button is-success" onclick="proceedBS()">Save changes</button>
+						<button class="button" onclick="document.getElementById('popUpFormBS').style.display='none'">Cancel</button>
+					</footer>
+				</div>
+			</div>
+
+			<div class="main">
+				<a href="./add/item" style="text-decoration:underline; font-size:36px; font-weight:700;">Use this link page to add roadside item instead of following input area.<br>
+				Please modify link style as suitable for this page.</a>
+				<div class="columns lgWrap">
+			        {{#each items}}
+			            <div class="column is-one-third lgColumn">
+			                <div class="card">
+			                    <div class="card-image">
+			                        <figure class="image is-4by3">
+			                            <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+			                        </figure>
+			                    </div>
+			                    <header class="card-header">
+			                        <p class="card-header-title">
+			                            {{name}}
+			                        </p>
+			                        <a href="#" class="card-header-icon" aria-label="more options">
+			                          <span class="icon">
+			                            <i class="fa fa-angle-down" aria-hidden="true"></i>
+			                          </span>
+			                        </a>
+			                    </header>
+			                    <div class="card-content">
+			                        <div class="content">
+			                            {{description}}
+			                            <br>
+			                            <span class="price">${{price}}</span>
+			                        </div>
+			                    </div>
+			                    {{#if loggedIn}}
+			                        <footer class="card-footer">
+			                            {{#unless isUser}}
+			                                <a href="#" class="card-footer-item">Save</a>
+			                            {{/unless}}
+			                            {{#if isUser}}
+			                                <a href="#" class="card-footer-item">Delete</a>
+			                            {{/if}}
+			                        </footer>
+			                    {{/if}}
+			                </div>
+			            </div>
+			        {{/each}}
+			    </div>
+			</div>
+		</div>
+	</div>
+</p>
