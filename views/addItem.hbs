@@ -16,13 +16,50 @@ and The item id parameter specify item by id. use object id as item id.
 			<h1 class="subtitle">Add new selling item</h1>
 			<form  action="/add/{{itemType}}" method="post" id="itemForm">
 			{{input "Item Name" "text" id="itemName" required=true placeHolder="put Item Name here."}}
+				{{#unless isRoadSide}}
 			{{input "Item Price" "text" id="itemPrice" required=true placeHolder="put Item Price here."  isNum=true}}
-			{{!-- TODO:Photo submit? --}}
+				{{/unless}}
+				{{input "Item Description" "textarea"  id="description" placeHolder="put item description here."}}
 				{{#if isRoadside}}
 				{{!--TODO: How to add location data? --}}
-					{{input "Location" "text" id="location" required=true placeHolder="put Item Name here."}}
+					<lable class="b">Pin Location on Map</lable>
+					<div id="map" class="fullwidth" ></div>
+					<div id="current">Marker is Currently at: Current Lat: 44.974 Current Lng: -93.237</div>
+					<script>
+						var map;
+						function initializeMap() {
+							var map = new google.maps.Map(document.getElementById('map'), {
+								zoom: 14,
+								center: new google.maps.LatLng(44.974, -93.237),
+								mapTypeId: google.maps.MapTypeId.ROADMAP
+							});
+
+							var myMarker = new google.maps.Marker({
+								position: new google.maps.LatLng(44.974, -93.237),
+								draggable: true
+							});
+							google.maps.event.addListener(myMarker, 'dragend', function (evt) {
+								$("#lon").val( evt.latLng.lng().toFixed(3));
+								$("#lat").val(evt.latLng.lat().toFixed(3));
+								//document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
+							});
+
+							google.maps.event.addListener(myMarker, 'dragstart', function (evt) {
+								//document.getElementById('current').innerHTML = '<p>Marker is Currently at: Current Lat: 44.974 Current Lng: -93.237</p>';
+								$("#lon").val( evt.latLng.lng().toFixed(3));
+								$("#lat").val(evt.latLng.lat().toFixed(3));
+							});
+
+							map.setCenter(myMarker.position);
+							myMarker.setMap(map);
+						}
+					</script>
+					<script async defer
+					        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHlhlAslc3THDNUBE7HZ18Q5brP_dk950&callback=initializeMap">
+					</script>
+					<input type="text" class="is-hidden" id="longtitude" name="longtitude">
+					<input type="text" class="is-hidden" id="latitude" name="latitude">
 				{{/if}}
-			{{input "Item Description" "textarea"  id="description" placeHolder="put item description here."}}
 			<a class="button is-success" id="itemFormSubmit">Save Items</a>
 			<a class="button">Cancel</a>
 			</form>
