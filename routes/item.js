@@ -4,7 +4,9 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/', function(req, res, next){
     var Item = require("../model/buySellItem");
-    
+
+    var RSItem = require("../model/roadsideItem");
+
     var pitem;
      var userID;
      if(req.user){
@@ -52,6 +54,9 @@ router.get('/', function(req, res, next){
             items: itemData,
             personalitems: pitem
         });
+    });
+    RSItem.find().exec(function(err, column){
+        console.log(column);
     });
 });
 
