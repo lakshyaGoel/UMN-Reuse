@@ -1,8 +1,17 @@
 $(function(){
     console.log('local.js ready');
     //interested items
-      $('#interestedModal').click(function(){
-      $.post("/interested", {userid:"54321"})  });
+      $('.delete').click(function(){
+        console.log("Del Item Reached");
+        var uid=$(this).attr('id').substring(7);
+        console.log(uid);
+        $.post("/item-delete", {id:uid},
+        function(data){
+          console.log(data);
+          location.reload(true);
+        }
+      );
+      });
     // Begin: tab control
     $(".switch-BuySell, .switch-Roadside, .switch-MyItems").on("click", function(){
         var label = $(this).attr("class").replace("switch-", "");
