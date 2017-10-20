@@ -53,4 +53,22 @@ $(function(){
         }
         return result;
     }
+
+    // to save and delete
+    $(".item-save").on("click", function(){
+        var itemId = $(this).parent().find(".itemID").text();
+        var $item = $(this);
+        $.ajax({
+            async: false,
+            url: '/item-save',
+            type: 'post',
+            data:{"id": itemId},
+            dataType: 'json'
+        }).done(function(res){
+            console.debug(res);
+            $item.text("Saved");
+        }).fail(function(xhr, status, error){
+            alert(status);
+        });
+    });
 });

@@ -1,6 +1,7 @@
 <div class="main">
-	<a href="./add/item" style="text-decoration:underline; font-size:36px; font-weight:700;">Use this link page to add roadside item instead of following input area.<br>
-	Please modify link style as suitable for this page.</a>
+	<section class="section">
+	<a href="./add/item" class="button is-success">Add Selling Item</a>
+	</section>
 	<div class="columns lgWrap">
         {{#each items}}
             <div class="column is-one-third lgColumn">
@@ -30,11 +31,14 @@
                     {{#if loggedIn}}
                         <footer class="card-footer">
                             {{#unless isUser}}
-                                <a href="#" class="card-footer-item">Save</a>
+                                <a href="#" class="card-footer-item item-save">
+	                                {{#if savedFlg}}Saved{{else}}Save{{/if}}
+                                  </a>
                             {{/unless}}
                             {{#if isUser}}
-                                <a href="#" class="card-footer-item">Delete</a>
+                                <a href="#" class="card-footer-item item-delete">Delete</a>
                             {{/if}}
+	                        <span class="is-hidden itemID">{{_id}}</span>
                         </footer>
                     {{/if}}
                 </div>
