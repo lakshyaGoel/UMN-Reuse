@@ -4,27 +4,6 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/', function(req, res, next){
     var Item = require("../model/buySellItem");
-
-    //Vaybhav's Part
-    var pitem;
-    var userID;
-    if(req.user){
-        userID = req.user.displayName;
-    }else{
-        userID = "NA";
-    }
-    Item.find().where({"userId": userID})
-         .exec(function(err, column){
-           if(err){
-             console.log(err);
-           }
-           if(column){
-             pitem = JSON.parse(JSON.stringify(column));
-      }
-
-    });
-
-    //Lakshya's Part
     Item.find().exec(function(err, column){
         var isLoggedIn;
         var userID;
@@ -53,8 +32,7 @@ router.get('/', function(req, res, next){
             itemData.push(a);
         });
         res.render('index.hbs', {
-            items: itemData,
-            personalitems: pitem
+            items: itemData
         });
     });
 });

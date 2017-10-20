@@ -13,13 +13,12 @@ var roadsideItem = new mongoose.Schema({
             return /.+/.test(v)
         }
     },
-    userId: String,
+    photo: [],
     description: String,
-    location: {
-      type: String,
-      coordinates:[]
-    },
-    photo: []
+    price: Number,
+    location: [],
+    userId: Schema.Types.ObjectId// Aki add this because I think user sometimes want to edit their post, and that time, this parameter help to find which user post this roadside item.
 });
 
-module.exports = mongoose.model("roadsideItem", roadsideItem);
+module.exports = mongoose.model("RoadsideItem", roadsideItem);
+
