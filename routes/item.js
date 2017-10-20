@@ -4,7 +4,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/', function(req, res, next){
     var Item = require("../model/buySellItem");
-
+    var RSItem = require("../model/roadsideItem");
     var pitem;
      var userID;
      if(req.user){
@@ -52,7 +52,21 @@ router.get('/', function(req, res, next){
             items: itemData,
             personalitems: pitem
         });
+
+    }).then(function(result){
+        // RSItem.find().exec(function(err, column){
+        //     console.log("load data from roadsideDatabase");
+        //     console.log(column);
+        //
+        // });
+        res.render('index.hbs', {
+            items: itemData,
+            personalitems: pitem
+        });
+    }).catch(function(err){
+        console.log("run erro?");
     });
+
 });
 
 router.post('/item-save',function(req, res){
