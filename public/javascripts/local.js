@@ -1,17 +1,13 @@
 $(function(){
     console.log('local.js ready');
     //interested items
-      $('.delete').click(function(){
-        console.log("Del Item Reached");
+    $('.deleteFunction').click(function(){
         var uid=$(this).attr('id').substring(7);
-        console.log(uid);
-        $.post("/item-delete", {id:uid},
-        function(data){
-          console.log(data);
-          location.reload(true);
-        }
-      );
-      });
+         $.post("/item-delete", {id:uid},function(data){
+             location.reload(true);
+         }
+               );
+       });
     // Begin: tab control
     $(".switch-BuySell, .switch-Roadside, .switch-MyItems").on("click", function(){
         var label = $(this).attr("class").replace("switch-", "");
@@ -95,5 +91,5 @@ $(function(){
         }).fail(function(xhr, status, error){
            alert(status);
         });
-    })
+    });
 });
