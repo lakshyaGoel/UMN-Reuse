@@ -1,8 +1,17 @@
 $(function(){
     console.log('local.js ready');
     //interested items
-      $('#interestedModal').click(function(){
-      $.post("/interested", {userid:"54321"})  });
+      $('.delete').click(function(){
+        console.log("Del Item Reached");
+        var uid=$(this).attr('id').substring(7);
+        console.log(uid);
+        $.post("/item-delete", {id:uid},
+        function(data){
+          console.log(data);
+          location.reload(true);
+        }
+      );
+      });
     // Begin: tab control
     $(".switch-BuySell, .switch-Roadside, .switch-MyItems").on("click", function(){
         var label = $(this).attr("class").replace("switch-", "");
@@ -53,4 +62,38 @@ $(function(){
         }
         return result;
     }
+
+    // item save
+    $(".item-save").on("click", function(){
+        var itemId = $(this).parent().find(".itemID").text();
+        var $item = $(this);
+        $.ajax({
+            async: false,
+            url: '/item-save',
+            type: 'post',
+            data:{"id": itemId},
+            dataType: 'json'
+        }).done(function(res){
+            window.location.href = "/";
+        }).fail(function(xhr, status, error){
+            alert(status);
+        });
+    });
+
+    // item delete
+    $(".item-delete").on("click", function(){
+        var itemId = $(this).parent().find(".itemID").text();
+        var $item = $(this);
+        $.ajax({
+            async:false,
+            url:'/item-delete',
+            type: 'post',
+            data:{"id": itemId},
+            dataType: 'json',
+        }).done(function(res){
+            window.location.href = "/";
+        }).fail(function(xhr, status, error){
+           alert(status);
+        });
+    })
 });
