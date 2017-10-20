@@ -19,7 +19,7 @@ router.get('/', function(req, res, next){
             var a = JSON.parse(JSON.stringify(x));
             a["loggedIn"] = isLoggedIn;
             a["userEmailID"] = userID;
-            if(a.interested.indexOf(req.user.displayName) != -1){
+            if(a.interested.indexOf(userID) != -1){
                 a["savedFlg"] = true;
             }else{
                 a["savedFlg"] = false;
@@ -71,5 +71,16 @@ router.post('/item-save',function(req, res){
     });
 });
 
+router.post('/item-delete',function(req, res){
+    var BuySellItem = require("../model/buySellItem");
+    BuySellItem.deleteOne({"_id": ObjectId(req.body.id)})
+        .then(function(){
+            res.send(JSON.stringify({"result": true}));
+        })
+        .catch(function(){
+            res.send(JSON.stringify({"result":false}));
+        });
+
+});
 
 module.exports = router;
