@@ -1,8 +1,10 @@
 <div class="main">
+	{{#if login}}
     <a href="./add/item"><span class="lgSpan">+ Add Item for Sale</span></a>
-	<div class="columns lgWrap">
+	{{/if}}
+	<div class="columns  is-multiline">
         {{#each items}}
-            <div class="column is-one-third lgColumn">
+            <div class="is-one-quarter column cardColumn">
                 <div class="card">
                     <div class="card-image">
                         <figure class="image is-4by3">

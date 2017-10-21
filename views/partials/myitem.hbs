@@ -1,7 +1,9 @@
-<div class="columns lgWrap">
-<header>My Items</header>
+<div class="columns">
+	<div class="column">
+		<header>My Items</header>
+		<div class="columns  is-multiline">
       {{#each personalitems}}
-          <div class="column is-one-third lgColumn">
+          <div class="is-half column">
               <div class="card">
                   <div class="card-image">
                       <figure class="image is-4by3">
@@ -27,14 +29,22 @@
                   </div>
 
                       <footer class="card-footer">
-                          <a id="#" class="card-footer-item"><span class="deleteFunction" id="delete_{{this._id}}">Delete</span></a>
-                          <a id="#" class="card-footer-item"><span class="interestedFunction" id="{{this._id}}">Interested</span></a>
+                          <a class="card-footer-item item-delete">Delete</a>
+                          <a class="card-footer-item item-{{!save}}">interested</a>
+	                      <span class="is-hidden itemID">{{this._id}}</span>
                           {{data}}
-
                       </footer>
 
 
               </div>
           </div>
       {{/each}}
+		</div>
   </div>
+	<div class="column">
+		<h2>Saved Item</h2>
+		<div class="savedCards columns  is-multiline">
+
+		</div>
+	</div>
+</div>

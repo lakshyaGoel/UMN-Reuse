@@ -34,10 +34,10 @@ router.get('/:itemType/', function(req, res, next){
 /* POST home page. */
 router.post('/:itemType/', function(req, res, next){
     if(req.user){
+        // TODO: item validation
         req.checkBody('itemName', 'Item name is blank! Fill out please.').notEmpty();
         //req.checkBody('itemPrice', 'Item price is illegal! Fill out number please!');
 
-        // TODO: step3: if success, send success.
         if(req.params.itemType == "item"){// add buySell item to the database
             function saveData(){
                 var BuySellItem = require("../model/buySellItem");
@@ -55,8 +55,8 @@ router.post('/:itemType/', function(req, res, next){
                 });
             }
         }else if(req.params.itemType == "roadside"){
+            console.log("route/add roadside");
 
-            //TODO: step2: save itemdata
             function saveData(){
                 var RoadSideItem = require("../model/roadsideItem");
                 var item = new RoadSideItem();
@@ -100,11 +100,11 @@ router.post('/:itemType/', function(req, res, next){
                     }
                 });
         }else{
-
+            res.render("error");// TODO: think proper link move
         }
+    }else{
+        res.render("error");
     }
-    // TODO: step6(client side): show success/false message
-    // TODO: Must use Promise()! It is better than callback chain.
 });
 
 module.exports = router;

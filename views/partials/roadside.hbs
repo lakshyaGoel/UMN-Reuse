@@ -1,8 +1,10 @@
 <div class="main">
+	{{#if login}}
 	<a href="./add/roadside"><span class="lgSpan">+ Add Roadside Sighting</span></a>
-	<div class="columns lgWrap">
+	{{/if}}
+	<div class="columns  is-multiline">
 		{{#each itemsRS}}
-			<div class="column is-one-third lgColumn">
+			<div class="is-one-quarter column cardColumn">
 				<div class="card">
 					<div class="card-image">
 						<figure class="image is-4by3">
@@ -23,7 +25,7 @@
 						<div class="content">
 							{{description}}
 							<br>
-							<span class="location">${{loaction}}</span>
+							<span class="location">{{loaction}}</span>
 						</div>
 					</div>
 					{{#if loggedIn}}
@@ -31,6 +33,7 @@
 							{{#unless isUser}}
 								<a href="#" class="card-footer-item item-save">
 									Get Location
+									{{!--TODO: how to show location? --}}
 								</a>
 							{{/unless}}
 							{{#if isUser}}

@@ -1,18 +1,5 @@
 $(function(){
     console.log('local.js ready');
-    //interested items
-      $('.deleteFunction').click(function(){
-        console.log("Del Item Reached");
-        var uid=$(this).attr('id').substring(7);
-        console.log(uid);
-        $.post("/item-delete", {id:uid},
-        function(data){
-          console.log(data);
-          location.reload(true);
-
-        }
-      );
-      });
       //interested function
       $('.interestedFunction').click(function(){
         console.log("Interested Item Reached");
@@ -30,7 +17,6 @@ $(function(){
     // Begin: tab control
     $(".switch-BuySell, .switch-Roadside, .switch-MyItems").on("click", function(){
         var label = $(this).attr("class").replace("switch-", "");
-        console.log(label);
         $(".tabs").find(".is-active").each(function(){
             $(this).removeClass("is-active");
         });
@@ -110,5 +96,22 @@ $(function(){
         }).fail(function(xhr, status, error){
            alert(status);
         });
-    })
+    });
+
+    // add saved item card to myItem tab page.
+    $(".switch-MyItems").on("click", function(){
+        var cardColumnList = [];
+        $(".cardColumn").each(function(){
+            var $cardHasItemSaveClass = $(this).find(".item-save");
+            if($cardHasItemSaveClass){
+                if($cardHasItemSaveClass.text().indexOf("Saved") != -1){
+                    cardColumnList.push($(this)[0].outerHTML);
+                }
+            }
+        });
+        $(".savedCards").html(cardColumnList.join(" "));
+        $(".savedCards").find(".cardColumn").each(function(){
+            $(this).removeClass("cardColumn").removeClass("is-one-quarter").addClass("is-half");
+        });
+    });
 });
