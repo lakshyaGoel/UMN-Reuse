@@ -55,7 +55,7 @@
 																	];
 
 																	var mapCoordinates = a[0].coordinate;
-																	function initializeMap() {
+																	function initMaprs() {
 																		var geocoder = new google.maps.Geocoder;
         														var infowindow = new google.maps.InfoWindow;
 																		var map = new google.maps.Map(document.getElementById('map'), {
@@ -70,37 +70,16 @@
 																				position: new google.maps.LatLng(mapCoordinates[0],mapCoordinates[1]),
 																				draggable: false
 																		});
-																		//var latlng = {lat: parseFloat(mapCoordinates[0]), lng: parseFloat(mapCoordinates[1])};
-        													// 	geocoder.geocode({'location': latlng}, function(results, status) {
-																	// 		console.log(results[0].formatted_address);
-          												// 	if (status === 'OK') {
-																	// 		console.log(results[0].formatted_address);
-																	// 		document.getElementById('current').innerHTML = '<p>The address is: ' + results[0].formatted_address + '</p>';
-																	// 	}
-																	//});
+
 
 
 													map.setCenter(myMarker.position);
 													myMarker.setMap(map);
-													geocodeLatLng(geocoder, map, infowindow);
-												}
-												function geocodeLatLng(geocoder, map, infowindow) {
 
-													var latlng = {lat: parseFloat(mapCoordinates[0]), lng: parseFloat(mapCoordinates[1])};
-													geocoder.geocode({'location': latlng}, function(results, status) {
-														if (status === 'OK') {
-																infowindow.setContent(results[0].formatted_address);
-																infowindow.open(map, marker);
-
-														} else {
-															window.alert('Geocoder failed due to: ' + status);
-														}
-													});
 												}
+
 											</script>
-											<script async defer
-											src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHlhlAslc3THDNUBE7HZ18Q5brP_dk950&callback=initializeMap">
-											</script>
+
 										</section>
 										<footer class="modal-card-foot">
 
