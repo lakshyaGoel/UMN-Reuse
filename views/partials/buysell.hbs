@@ -1,6 +1,10 @@
 <div class="main">
 	{{#if login}}
         <a href="./add/item"><span class="lgSpan">+ Add Item for Sale</span></a>
+        <form action="/search" method="post">
+            <input type="text" name="ProductName">
+            <input type="submit" value="Search">
+        </form>
 	{{/if}}
 	<div class="columns lgColumn is-multiline">
         {{#each items}}
