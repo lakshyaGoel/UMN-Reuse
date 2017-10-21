@@ -8,8 +8,10 @@ router.get('/', function(req, res, next){
   var pitem;
   var userID;
   var itemDataRS = [];
+  var login = false;
   if(req.user){
     userID = req.user.displayName;
+    login = true;
   }else{
     userID = "NA";
   }
@@ -71,7 +73,9 @@ router.get('/', function(req, res, next){
         a["isUser"] = flag;
         itemData.push(a);
       });
+        console.log("login",login);
       res.render('index.hbs', {
+        login: login,
         items: itemData,
         personalitems: pitem,
         itemsRS: itemDataRS
@@ -146,6 +150,8 @@ router.post('/item-interested',function(req, res){
           var result = '<p>' + column + '</p>';
           res.render('partials/myitem.hbs', {data : result});
          })
+
+
 
 });
 module.exports = router;
