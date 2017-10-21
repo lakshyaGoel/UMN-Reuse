@@ -1,6 +1,10 @@
-button .is-success.lgSpan{
+.lgSpan{
     border-color: hsl(171, 100%, 41%);
     background: hsl(171, 100%, 41%);
+    border-radius: 0.3rem;
+    border-width: thick;
+    border-style: solid;
+    color: white;
     font-weight: bolder;
     font-size: larger;
 }
@@ -15,4 +19,12 @@ button .is-success.lgSpan{
 }
 .lgNavBarTitle:hover {
     background-color: #00d1b2 !important;
+}
+.lgWrap{
+    padding-top: 2rem;
+    display: block !important;
+}
+
+.lgColumn{
+    padding-top: 2rem;
 }
