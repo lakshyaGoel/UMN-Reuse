@@ -87,7 +87,6 @@ router.get('/', function(req, res, next){
 });
 
 router.post('/item-save',function(req, res){
-    var obj = {};
     var BuySellItem = require("../model/buySellItem");
     BuySellItem.findOne({"_id": ObjectId(req.body.id)}).exec(function(err, column){
         // TODO: fix it to enable saved => save. now only use could do save => saved
@@ -149,9 +148,15 @@ router.post('/item-interested',function(req, res){
           //  console.log("DATA::: " + result);
           var result = '<p>' + column + '</p>';
           res.render('partials/myitem.hbs', {data : result});
-         })
-
-
-
+         });
 });
+
+// rest of routes/index.js
+
+/*myitems*/
+router.post("/interested",function(req, res){
+    console.log("user id"+req.body.userid);
+    res.render('partials/myitem', {u_id: 'req.body.userid'});
+});
+
 module.exports = router;

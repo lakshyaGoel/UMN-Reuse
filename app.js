@@ -18,7 +18,6 @@ const auth = require('./auth');
 const expressValidator = require('express-validator');
 
 // route files
-const index = require('./routes/index');
 const item = require('./routes/item');
 const add = require('./routes/add');
 const edit = require('./routes/edit');
@@ -69,7 +68,6 @@ app.use(function(req, res, next) {
 
 // route use setting
 app.use('/', item);
-app.use('/', index);
 app.use('/add', add);
 app.use('/edit', edit);
 
