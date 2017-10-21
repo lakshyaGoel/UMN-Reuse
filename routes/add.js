@@ -70,7 +70,7 @@ router.post('/:itemType/', function(req, res, next){
                 };
 
                 item.location["type"] = "Point";
-                item.location.push(addLocation);
+                item.location=(addLocation);
                 console.log("start req.body");
                 console.log(req.body);
                 return item.save(function(err){

@@ -3,75 +3,87 @@ var router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
 
 router.get('/', function(req, res, next){
-    var Item = require("../model/buySellItem");
-    var RSItem = require("../model/roadsideItem");
-    var pitem;
-     var userID;
-     if(req.user){
-         userID = req.user.displayName;
-     }else{
-         userID = "NA";
-     }
-     Item.find().where({"userId": userID})
-          .exec(function(err, column){
-            if(err){
-              console.log(err);           }
-            if(column){
-              pitem = JSON.parse(JSON.stringify(column));
-       }
-
-     });
-    Item.find().exec(function(err, column){
-        var isLoggedIn;
-        var userID;
-        var itemData = [];
-        if(req.user){
-            isLoggedIn = true;
-            userID = req.user.displayName;
-        }else{
-            isLoggedIn = false;
-            userID = "NA";
-        }
-        column.forEach(function(x){
-            var a = JSON.parse(JSON.stringify(x));
-            a["loggedIn"] = isLoggedIn;
-            a["userEmailID"] = userID;
-            if(a.interested.indexOf(userID) != -1){
-                a["savedFlg"] = true;
-            }else{
-                a["savedFlg"] = false;
-            }
-            var flag = false;
-            if(userID == a["userId"]){
-                flag = true;
-            }
-            a["isUser"] = flag;
-            itemData.push(a);
-        });
-        res.render('index.hbs', {
-            items: itemData,
-            personalitems: pitem
-        });
-
-    }).then(function(result){
-        // RSItem.find().exec(function(err, column){
-        //     console.log("load data from roadsideDatabase");
-        //     console.log(column);
-        //
-        // });
-        res.render('index.hbs', {
-            items: itemData,
-            personalitems: pitem
-        });
-    }).catch(function(err){
-        console.log("run erro?");
+  var Item = require("../model/buySellItem");
+  var RSItem = require("../model/roadsideItem");
+  var pitem;
+  var userID;
+  var itemDataRS = [];
+  if(req.user){
+    userID = req.user.displayName;
+  }else{
+    userID = "NA";
+  }
+  Item.find().where({"userId": userID})
+    .exec(function(err, column){
+      if(err){
+        console.log(err);
+      }
+      if(column){
+        pitem = JSON.parse(JSON.stringify(column));
+      }
     });
+    RSItem.find().exec(function(err, column){
+      var isLoggedIn;
+      var userID;
+      if(req.user){
+        isLoggedIn = true;
+        userID = req.user.displayName;
+      }else{
+        isLoggedIn = false;
+        userID = "NA";
+      }
+      column.forEach(function(x){
+      var a = JSON.parse(JSON.stringify(x));
+      a["loggedIn"] = isLoggedIn;
+      a["userEmailID"] = userID;
 
+      var flag = false;
+      if(userID == a["userId"]){
+        flag = true;
+      }
+      a["isUser"] = flag;
+      itemDataRS.push(a);
+    });
+    Item.find().exec(function(err, column){
+      var isLoggedIn;
+      var userID;
+      var itemData = [];
+      if(req.user){
+        isLoggedIn = true;
+        userID = req.user.displayName;
+      }else{
+        isLoggedIn = false;
+        userID = "NA";
+      }
+      column.forEach(function(x){
+        var a = JSON.parse(JSON.stringify(x));
+        a["loggedIn"] = isLoggedIn;
+        a["userEmailID"] = userID;
+        if(a.interested.indexOf(userID) != -1){
+          a["savedFlg"] = true;
+        }else{
+          a["savedFlg"] = false;
+        }
+        var flag = false;
+        if(userID == a["userId"]){
+          flag = true;
+        }
+        a["isUser"] = flag;
+        itemData.push(a);
+      });
+      res.render('index.hbs', {
+        items: itemData,
+        personalitems: pitem,
+        itemsRS: itemDataRS
+      });
+    })
+  }).catch(function(err){
+    console.log("run erro?");
+  });
 });
 
 router.post('/item-save',function(req, res){
     var obj = {};
-    console.log('body: ' + JSON.stringify(req.body.id));
     var BuySellItem = require("../model/buySellItem");
     BuySellItem.findOne({"_id": ObjectId(req.body.id)}).exec(function(err, column){
         // TODO: fix it to enable saved => save. now only use could do save => saved
