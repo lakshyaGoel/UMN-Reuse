@@ -1,19 +1,6 @@
-.lgWrap{
-    padding-top: 2rem;
-    display: block !important;
-}
-
-.lgColumn{
-    display: inline-block;
-    width: 24% !important;
-}
-.lgSpan{
+button .is-success.lgSpan{
     border-color: hsl(171, 100%, 41%);
     background: hsl(171, 100%, 41%);
-    border-radius: 0.3rem;
-    border-width: thick;
-    border-style: solid;
-    color: white;
     font-weight: bolder;
     font-size: larger;
 }
