@@ -3,7 +3,7 @@
 		<header>My Items</header>
 		<div class="columns  is-multiline">
       {{#each personalitems}}
-          <div class="is-half column">
+          <div class="is-one-quarter column cardColumn">
               <div class="card">
                   <div class="card-image">
                       <figure class="image is-4by3">
@@ -23,28 +23,95 @@
                   <div class="card-content">
                       <div class="content">
                           {{description}}
-
+                          <br>
                           <span class="price">${{price}}</span>
                       </div>
                   </div>
+                  <footer class="card-footer">
+                      <a id="#" class="card-footer-item"><span class="deleteFunction" id="delete_{{this._id}}">Delete</span></a>
+                      <a id="#" class="card-footer-item" href="./item-interested"><span class="interestedFunction" id="{{this._id}}">Interested</span></a>
+                  </footer>
 
-                      <footer class="card-footer">
-                          <a class="card-footer-item item-delete">Delete</a>
-                          <a class="card-footer-item item-{{!save}}">interested</a>
-	                      <span class="is-hidden itemID">{{this._id}}</span>
+                      <!--Pop-up form-->
+                      <div id="popUpFormV" class="modal" >
+                       <div class="modal-background"></div>
+                       <div class="modal-card">
+                         <header class="modal-card-head">
+                           <p class="modal-card-title">People Interested In Your Item</p>
+                           <button class="delete" aria-label="close" onclick="document.getElementById('popUpFormV').style.display='none'"></button>
+                         </header>
+                         <section class="modal-card-body">
+                           <p>YEAH</p>
+
                           {{data}}
-                      </footer>
 
+                         </section>
+                         <footer class="modal-card-foot">
+                           <button class="button" onclick="document.getElementById('popUpFormV').style.display='none'">Cancel</button>
+                         </footer>
+                       </div>
+                      </div>
 
               </div>
           </div>
-      {{/each}}
-		</div>
-  </div>
-	<div class="column">
-		<h2>Saved Item</h2>
-		<div class="savedCards columns  is-multiline">
 
-		</div>
-	</div>
+      {{/each}}
+    </div>
+      <br>
+      <br>
+<header>Liked By Me</header>
+<div class="columns  is-multiline">
+{{#each uItem}}
+    <div class="is-one-quarter column cardColumn">
+        <div class="card">
+            <div class="card-image">
+                <figure class="image is-4by3">
+                    <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
+                </figure>
+            </div>
+            <header class="card-header">
+                <p class="card-header-title">
+                    {{name}}
+                </p>
+                <a href="#" class="card-header-icon" aria-label="more options">
+                  <span class="icon">
+                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </a>
+            </header>
+            <div class="card-content">
+                <div class="content">
+                    {{description}}
+
+                    <span class="price">${{price}}</span>
+                </div>
+            </div>
+
+                <footer class="card-footer">
+                    <a id="#" class="card-footer-item"><span class="deleteFunction" id="delete_{{this._id}}">Delete</span></a>
+                    <a id="#" class="card-footer-item" href="./item-interested"><span class="interestedFunction" id="{{this._id}}">Interested</span></a>
+                </footer>
+                <!--Pop-up form-->
+                <div id="popUpFormV" class="modal" >
+                 <div class="modal-background"></div>
+                 <div class="modal-card">
+                   <header class="modal-card-head">
+                     <p class="modal-card-title">People Interested In Your Item</p>
+                     <button class="delete" aria-label="close" onclick="document.getElementById('popUpFormV').style.display='none'"></button>
+                   </header>
+                   <section class="modal-card-body">
+                     <p>YEAH</p>
+
+                    {{data}}
+
+                   </section>
+                   <footer class="modal-card-foot">
+                     <button class="button" onclick="document.getElementById('popUpFormV').style.display='none'">Cancel</button>
+                   </footer>
+                 </div>
+                </div>
+
+        </div>
+    </div>
+{{/each}}
 </div>
