@@ -36,9 +36,10 @@ router.get('/', function(req, res, next){
       }
       column.forEach(function(x){
       var a = JSON.parse(JSON.stringify(x));
+      //console.log(a);
       a["loggedIn"] = isLoggedIn;
       a["userEmailID"] = userID;
-
+      //a.location[0].coordinates = JSON.parse(JSON.stringify(a.location[0].coordinates));
       var flag = false;
       if(userID == a["userId"]){
         flag = true;
