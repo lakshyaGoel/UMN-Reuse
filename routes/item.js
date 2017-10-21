@@ -5,6 +5,7 @@ var ObjectId = require('mongoose').Types.ObjectId;
 router.get('/', function(req, res, next){
   var Item = require("../model/buySellItem");
   var RSItem = require("../model/roadsideItem");
+  var uItem;
   var pitem;
   var userID;
   var itemDataRS = [];
@@ -15,6 +16,18 @@ router.get('/', function(req, res, next){
   }else{
     userID = "NA";
   }
+  //@Vaybhav : User Interested In
+  Item.find().where({"interested": userID})
+    .exec(function(err, column){
+      if(err){
+        console.log(err);
+      }
+      if(column){
+        uItem = JSON.parse(JSON.stringify(column));
+        console.log(uItem);
+      }
+    });
+
   Item.find().where({"userId": userID})
     .exec(function(err, column){
       if(err){
@@ -79,7 +92,8 @@ router.get('/', function(req, res, next){
         login: login,
         items: itemData,
         personalitems: pitem,
-        itemsRS: itemDataRS
+        itemsRS: itemDataRS,
+        uItem: uItem
       });
     })
   }).catch(function(err){
@@ -135,22 +149,16 @@ router.post('/item-delete',function(req, res){
         });
 
 });
-router.post('/item-interested',function(req, res){
+router.get('/item-interested',function(req, res){
     var BuySellItem = require("../model/buySellItem");
-    var userID;
-    if(req.user){
-        userID = req.user.displayName;
-    }else{
-        userID = "NA";
-    }
+
     BuySellItem.find({"_id": ObjectId(req.body.id)})
          .then(function(column){
-          //  var result = column["interested"];
-          //  console.log("DATA::: " + result);
-          var result = '<p>' + column + '</p>';
-          res.render('partials/myitem.hbs', {data : result});
-         });
-});
+           res.render('partials/myitem.hbs', {
+             data: column
+           });
+        })
+      });
 
 // rest of routes/index.js
 

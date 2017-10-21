@@ -6,12 +6,20 @@ $(function(){
         var uid=$(this).attr('id');
 
         console.log(uid);
-         $.post("/item-interested", {id:uid},
-         function(data){
-           console.log(data);
-      //     location.reload(true);
+        $.ajax({
+            async: false,
+            url: '/item-interested',
+            type: 'get',
+            data:{"id": uid},
+            dataType: 'json'
+        }).success(function(data, textStatus, jqXHR){
+          console.log("HELLO");
+          console.log(data);
+          console.log(textStatus);
+        }).fail(function(xhr, status, error){
+            alert(status);
+        });
        });
-      });
 
 
     // Begin: tab control
@@ -90,7 +98,7 @@ $(function(){
             url:'/item-delete',
             type: 'post',
             data:{"id": itemId},
-            dataType: 'json',
+            dataType: 'json'
         }).done(function(res){
             window.location.href = "/";
         }).fail(function(xhr, status, error){
