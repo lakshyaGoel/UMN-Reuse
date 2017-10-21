@@ -80,6 +80,11 @@ the css is completely overwrite,
 so if you write any css in style.css,
 completely delete what you do!
 */
+/*RESET*/
+/* https://meyerweb.com/eric/tools/css/reset/
+	   v2.0 | 20110126
+	   License: none (public domain)
+	*/
 body {
   background-color: #fefefe; }
 
@@ -88,3 +93,361 @@ body {
   height: 400px; }
 
 /*# sourceMappingURL=style.css.map */
+
+
+/*jQuery Slider */
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+blockquote,
+q {
+  quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+
+/*GENERAL*/
+
+a {
+  text-decoration: none;
+}
+
+.wrapperAll {
+  width: 100%;
+  overflow: hidden;
+  font-size: .850em;
+  padding: 3em 0;
+  font-family: Verdana;
+  background-color: #f4f4ff;
+  border-radius: 25px;
+  /*border-color: black;
+  border-width: 0.5px;
+  border-style: solid;*/
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 960px;
+  margin: 2em auto;
+
+}
+
+.wrapper:after {
+  content: ' ';
+  display: block;
+  clear: both;
+
+}
+
+
+/*TITLE*/
+
+h1 {
+  float: left;
+  padding-bottom: 1em;
+  font-size: 140%;
+  font-family: Arial;
+  color: #4527a0;
+}
+
+.buttonLine {
+  float: right;
+  color: #ff8f00;
+  padding: .5em 1.2em;
+  border: solid 1px #ff8f00;
+  border-radius: 20px;
+}
+
+.buttonLine:hover {
+  background: #ff8f00;
+  color: #f7f7f7;
+  transition: all ease-in-out .3s;
+}
+
+
+/*SLIDER - COMPLETE*/
+
+.sliderComplete {
+  position: relative;
+}
+
+
+/*Slider*/
+
+.slider {
+  width: 300%;
+  transition: all .5s;
+}
+
+.slider li {
+  display: inline-block;
+  width: 200px;
+  margin: 0 1%;
+  padding-bottom: 2em;
+}
+
+.slider li:first-child {
+  margin-left: 0;
+}
+
+
+/*Content*/
+
+.slider li > * {
+  max-width: 100%;
+}
+
+
+/*Cover*/
+
+.slider li .cover {
+  position: relative;
+  display: inline-block;
+  border-radius: 6px;
+  b ox-sizing: border-box;
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+
+.slider li .cover img {
+  display: block;
+  width: 100%;
+}
+
+.slider li .cover:before {
+  display: block;
+  content: ' ';
+  background: rgba(247, 247, 247, 0);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.slider li .cover:hover:before {
+  background: rgba(247, 247, 247, .5);
+  transition: all .2s;
+}
+
+
+/*Informations*/
+
+.slider li p {
+  line-height: 1.3;
+  color: #38373a;
+}
+
+.slider li p a {
+  color: #ff8f00;
+}
+
+
+/*Buttons*/
+
+
+/*
+				The transition, added in CSS, will do the 'fadeIn' and the 'fadeOut' we can do in jQuery.
+				*/
+
+.sliderComplete button {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  padding: 1em 2em;
+  border: none;
+  background: #f0f0f0;
+  transition: all ease-in-out .5s;
+}
+
+.sliderComplete button[title="before"] {
+  left: 0;
+}
+
+.sliderComplete button[title="after"] {
+  right: 0;
+}
+
+.sliderComplete button.close {
+  opacity: 0;
+}
+
+.sliderComplete button.open {
+  opacity: .8;
+}
+
+
+/*Onclick*/
+
+
+/*The transition will allow the smooth animation of the slider.*/
+
+.turn {
+  margin-left: -75%;
+  transition: all .5s;
+}
+
+@media screen and (max-width:800px) {
+  /*
+	This prevents a potential overflow on the height and overflow allows the width for responsive. The scroll bar is not visible in any way on mobile.
+	*/
+  .sliderComplete .wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  .slider {
+    width: 200%;
+  }
+  .slider li {
+    width: 14%;
+  }
+  .slider li .cover {
+    width: 100%;
+  }
+}
+
+@media screen and (orientation:portrait) {
+  .sliderComplete .wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+  .slider {
+    width: 200%;
+  }
+  .slider li {
+    width: 14%;
+  }
+  .slider li .cover {
+    width: 100%;
+  }
+  .sliderComplete button,
+  .sliderComplete button.close,
+  .sliderComplete button.open {
+    display: none;
+    opacity: 0;
+  }
+}
