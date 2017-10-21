@@ -1,21 +1,21 @@
-<nav class="navbar is-light">
+<nav class="navbar is-primary">
 	<div class="container">
 		<div class="navbar-menu">
 			<div class="navbar-start">
-				<a class="navbar-item title" href="/">val=n Project</a>
+				<a class="navbar-item title" href="/">UMN Shuffler</a>
 			</div>
 			<div class="navbar-end">
 				{{#if user}}
-					<span class="navbar-item">
+					<span class="navbar-item lgNavBar">
               <figure class="image is-16x16">
                 <img src="{{ user.picture }}" alt="Image">
               </figure>
               &nbsp
 						{{ user.nickname }}
             </span>
-					<a class="navbar-item" href="/logout">log out</a>
+					<a class="navbar-item lgNavBarHref" href="/logout"><span class="lgSpan">Sign Out</span></a>
 				{{else}}
-					<a class="navbar-item" href="/login">log in</a>
+					<a class="navbar-item lgNavBarHref" href="/login"><span class="lgSpan">Sign In</span></a>
 				{{/if}}
 			</div>
 		</div>
