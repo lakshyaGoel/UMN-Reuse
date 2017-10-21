@@ -30,8 +30,8 @@
 					{{#if loggedIn}}
 						<footer class="card-footer">
 							{{#unless isUser}}
-								<a class="card-footer-item" onclick="document.getElementById('popUpFormRS').style.display='block'">
-									Get Location
+								<a class="card-footer-item" onclick="initMaprs()">
+									Get Location {{location.coordinates}}
 									{{!--TODO: how to show location? --}}
 								</a>
 								<div id="popUpFormRS" class="modal">
@@ -47,15 +47,18 @@
 											<!-- <div id="current">Marker is Currently at: </div> -->
 											<script>
 												var map;
-												var a = [
-													{{#each location}}
-																		{coordinate: [{{coordinates}}]},
-																		{type:"{{type}}"}
-																	{{/each}}
-																	];
 
-																	var mapCoordinates = a[0].coordinate;
 																	function initMaprs() {
+																		document.getElementById('popUpFormRS').style.display='block';
+																		var a = [
+																			{{#each location}}
+																								{coordinate: [{{coordinates}}]},
+																								{type:"{{type}}"}
+																							{{/each}}
+																							];
+
+																		var mapCoordinates = a[0].coordinate;
+																		console.log(mapCoordinates);
 																		var geocoder = new google.maps.Geocoder;
         														var infowindow = new google.maps.InfoWindow;
 																		var map = new google.maps.Map(document.getElementById('map'), {
@@ -73,8 +76,10 @@
 
 
 
+
 													map.setCenter(myMarker.position);
 													myMarker.setMap(map);
+
 
 												}
 
