@@ -15,13 +15,13 @@ and The item id parameter specify item by id. use object id as item id.
 		<section class="section">
 			<h1 class="subtitle">Add new selling item</h1>
 			<form  action="/add/{{itemType}}" method="post" id="itemForm">
+				{{!-- TODO: Photo register functionality --}}
 			{{input "Item Name" "text" id="itemName" required=true placeHolder="put Item Name here."}}
-				{{#unless isRoadSide}}
+				{{#unless isRoadside}}
 			{{input "Item Price" "text" id="itemPrice" required=true placeHolder="put Item Price here."  isNum=true}}
 				{{/unless}}
 				{{input "Item Description" "textarea"  id="description" placeHolder="put item description here."}}
 				{{#if isRoadside}}
-				{{!--TODO: How to add location data? --}}
 					<lable class="b">Pin Location on Map</lable>
 					<div id="map" class="fullwidth" ></div>
 					<div id="current">Marker is Currently at: Current Lat: 44.974 Current Lng: -93.237</div>
