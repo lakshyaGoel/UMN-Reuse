@@ -34,6 +34,7 @@ router.get('/:itemType/', function(req, res, next){
 /* POST home page. */
 router.post('/:itemType/', function(req, res, next){
     if(req.user){
+        // TODO: item validation
         req.checkBody('itemName', 'Item name is blank! Fill out please.').notEmpty();
         //req.checkBody('itemPrice', 'Item price is illegal! Fill out number please!');
 
@@ -99,7 +100,7 @@ router.post('/:itemType/', function(req, res, next){
                     }
                 });
         }else{
-            res.render("error");
+            res.render("error");// TODO: think proper link move
         }
     }else{
         res.render("error");

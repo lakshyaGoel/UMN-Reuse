@@ -4,5 +4,4 @@ $(function(){
         // TODO: form valiadtion
         $("#itemForm").submit();
     });
-
 });
