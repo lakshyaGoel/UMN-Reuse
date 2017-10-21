@@ -1,9 +1,7 @@
 <div class="main">
-	<section class="section">
-		<a href="./add/roadside" class="button is-success">Add Roadside Item</a>
-	</section>
+	<a href="./add/roadside"><span class="lgSpan">+ Add Roadside Sighting</span></a>
 	<div class="columns lgWrap">
-		{{#each items}}
+		{{#each itemsRS}}
 			<div class="column is-one-third lgColumn">
 				<div class="card">
 					<div class="card-image">
@@ -25,7 +23,7 @@
 						<div class="content">
 							{{description}}
 							<br>
-							<span class="price">${{price}}</span>
+							<span class="location">${{loaction}}</span>
 						</div>
 					</div>
 					{{#if loggedIn}}

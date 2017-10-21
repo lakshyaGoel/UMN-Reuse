@@ -25,6 +25,9 @@
   height: fit-content;
   margin-top: 0.8rem; }
 
+.lgNavBarTitle:hover {
+  background-color: #00d1b2 !important;
+  }
 /*
 # How to use scss
 
