@@ -8,6 +8,19 @@
  */
 var express = require('express');
 var router = express.Router();
+var multer  = require('multer');
+
+var storage = multer.diskStorage(({
+    destination: function(req, file,cb){
+        cb(null, 'public/uploads/');
+    },
+    filename:function(req, file, cb){
+        cb(null, file.originalname);
+    }
+}));
+
+var upload = multer({storage: storage});
+
 
 router.get('/:itemType/', function(req, res, next){
     var title = "Add ";
@@ -32,8 +45,30 @@ router.get('/:itemType/', function(req, res, next){
 
 
 /* POST home page. */
-router.post('/:itemType/', function(req, res, next){
+router.post('/:itemType/', upload.single('photo'),function(req, res, next){
     if(req.user){
+        var photo = [];
+        if(!req.file){
+            console.log("no photo!");
+        }else{
+            console.log("file there!");
+            // image file validator(beta version)
+            if(req.file.mimetype.indexOf("image") != -1){
+                console.log("photo!");
+
+                // devide localhost and heroku server.
+                // when program running in heroku, then use file!
+                var localFlg = true;
+                if(req.headers.host.indexOf("localhost") != -1){
+                    localFlg = true;
+                }else{
+                    localFlg = false;
+                }
+                photo.push({path: req.file.path, localFlg: localFlg});
+                console.log(photo);
+            }
+        }
+
         // TODO: item validation
         req.checkBody('itemName', 'Item name is blank! Fill out please.').notEmpty();
         //req.checkBody('itemPrice', 'Item price is illegal! Fill out number please!');
@@ -45,6 +80,7 @@ router.post('/:itemType/', function(req, res, next){
                 item.name = req.body.itemName;
                 item.description = req.body.description;
                 item.price = req.body.itemPrice;
+                item.photo = photo;
                 item.userId = req.user.displayName;
                 return item.save(function(err){
                     if(err){
@@ -63,6 +99,7 @@ router.post('/:itemType/', function(req, res, next){
                 item.name = req.body.itemName;
                 item.description = req.body.description;
                 item.userId = req.user.displayName;
+                item.photo = photo;
                 console.log(req.body);
                 var addLocation = {
                     "type": "Point",
