@@ -24,17 +24,91 @@
 					<div class="card-content">
 						<div class="content">
 							{{description}}
-							<br>
-							<span class="location">{{loaction}}</span>
+							s
 						</div>
 					</div>
 					{{#if loggedIn}}
 						<footer class="card-footer">
 							{{#unless isUser}}
-								<a href="#" class="card-footer-item item-save">
+								<a class="card-footer-item" onclick="document.getElementById('popUpFormRS').style.display='block'">
 									Get Location
 									{{!--TODO: how to show location? --}}
 								</a>
+								<div id="popUpFormRS" class="modal">
+									<div class="modal-background"></div>
+									<div class="modal-card">
+										<header class="modal-card-head">
+											<p class="modal-card-title">Add Details of road side item</p>
+											<button onclick="document.getElementById('popUpFormRS').style.display='none'" class="delete" aria-label="close"></button>
+										</header>
+										<section class="modal-card-body">
+
+											<lable class="b">The Location on Map</lable>
+											<div id="map" class="fullwidth" ></div>
+											<!-- <div id="current">Marker is Currently at: </div> -->
+											<script>
+												var map;
+												var a = [
+													{{#each location}}
+																		{coordinate: [{{coordinates}}]},
+																		{type:"{{type}}"}
+																	{{/each}}
+																	];
+
+																	var mapCoordinates = a[0].coordinate;
+																	function initializeMap() {
+																		var geocoder = new google.maps.Geocoder;
+        														var infowindow = new google.maps.InfoWindow;
+																		var map = new google.maps.Map(document.getElementById('map'), {
+																				zoom: 14,
+																				center: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1]),
+																				//center: new google.maps.LatLng(),
+																				mapTypeId: google.maps.MapTypeId.ROADMAP
+																		});
+
+																		var myMarker = new google.maps.Marker({
+																				//position: new google.maps.LatLng(44.974, -93.237),
+																				position: new google.maps.LatLng(mapCoordinates[0],mapCoordinates[1]),
+																				draggable: false
+																		});
+																		//var latlng = {lat: parseFloat(mapCoordinates[0]), lng: parseFloat(mapCoordinates[1])};
+        													// 	geocoder.geocode({'location': latlng}, function(results, status) {
+																	// 		console.log(results[0].formatted_address);
+          												// 	if (status === 'OK') {
+																	// 		console.log(results[0].formatted_address);
+																	// 		document.getElementById('current').innerHTML = '<p>The address is: ' + results[0].formatted_address + '</p>';
+																	// 	}
+																	//});
+
+
+													map.setCenter(myMarker.position);
+													myMarker.setMap(map);
+													geocodeLatLng(geocoder, map, infowindow);
+												}
+												function geocodeLatLng(geocoder, map, infowindow) {
+
+													var latlng = {lat: parseFloat(mapCoordinates[0]), lng: parseFloat(mapCoordinates[1])};
+													geocoder.geocode({'location': latlng}, function(results, status) {
+														if (status === 'OK') {
+																infowindow.setContent(results[0].formatted_address);
+																infowindow.open(map, marker);
+
+														} else {
+															window.alert('Geocoder failed due to: ' + status);
+														}
+													});
+												}
+											</script>
+											<script async defer
+											src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHlhlAslc3THDNUBE7HZ18Q5brP_dk950&callback=initializeMap">
+											</script>
+										</section>
+										<footer class="modal-card-foot">
+											<button class="button is-success">Save changes</button>
+											<button class="button" onclick="document.getElementById('popUpFormRS').style.display='none'">Cancel</button>
+										</footer>
+									</div>
+								</div>
 							{{/unless}}
 							{{#if isUser}}
 								<a href="#" class="card-footer-item item-delete">Delete</a>
@@ -46,4 +120,5 @@
 			</div>
 		{{/each}}
 	</div>
+
 </div>
