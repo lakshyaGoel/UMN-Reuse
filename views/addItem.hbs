@@ -14,8 +14,23 @@ and The item id parameter specify item by id. use object id as item id.
 	<article>
 		<section class="section">
 			<h1 class="subtitle">Add new selling item</h1>
-			<form  action="/add/{{itemType}}" method="post" id="itemForm">
-				{{!-- TODO: Photo register functionality --}}
+			<form  action="/add/{{itemType}}" enctype="multipart/form-data"  method="post" id="itemForm">
+
+				<div class="field-label is-normal">
+					<label class="label">
+						Photo
+					</label>
+				</div>
+
+				<div class="field is-horizontal">
+					<div class="field-body">
+					<div class="field">
+						<div class="control">
+							<input type="file" class="input" name="photo" id="photo">
+							</div>
+						</div>
+					</div>
+				</div>
 			{{input "Item Name" "text" id="itemName" required=true placeHolder="put Item Name here."}}
 				{{#unless isRoadside}}
 			{{input "Item Price" "text" id="itemPrice" required=true placeHolder="put Item Price here."  isNum=true}}

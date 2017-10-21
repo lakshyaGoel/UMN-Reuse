@@ -85,6 +85,10 @@ router.get('/', function(req, res, next){
           flag = true;
         }
         a["isUser"] = flag;
+        // file path modify
+        for(var i = 0; i < a["photo"].length; i++){
+            a["photo"][i]["path"] = a["photo"][i]["path"].replace("public", "");
+        }
         itemData.push(a);
       });
         console.log("login",login);
