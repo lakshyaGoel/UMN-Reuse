@@ -226,6 +226,7 @@ router.post('/search', function (req, res) {
         res.render('index.hbs', {
             items: itemData
             , login: login
+            , isSearch: true
         });
     });
 })

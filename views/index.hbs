@@ -3,10 +3,15 @@
 <main>
 	<div class="tabs is-large">
 		<ul>
-			<li class="is-active"><a class="switch-BuySell">Buy</a></li>
-			<li><a class="switch-Roadside">Roadside</a></li>
-			{{#if user}}
-				<li><a class="switch-MyItems">My Items</a></li>
+			{{#if isSearch}}
+				<li class="is-active"><a name="#">Item Search</a></li>
+				<li><a href="/">Back to top</a></li>
+			{{else}}
+				<li class="is-active"><a class="switch-BuySell">Buy</a></li>
+				<li><a class="switch-Roadside">Roadside</a></li>
+				{{#if user}}
+					<li><a class="switch-MyItems">My Items</a></li>
+				{{/if}}
 			{{/if}}
 		</ul>
 	</div>
