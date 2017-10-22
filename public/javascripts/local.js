@@ -1,36 +1,51 @@
 $(function(){
-    // document.getElementById('popUpFormRS').style.display='none';
+    //document.getElementById('popUpFormRS').style.display='none';
     console.log('local.js ready');
-    $('[name="slider"]').click(function() {
-    console.log("Inside!!!");
-    $(this).parents('.sliderComplete').children('button').removeClass('close').fadeIn(300);
 
-    // The button, that was visible, goes on display none.
-    $(this).addClass('close').fadeOut(300);
+    // $('[name="slider"]').click(function() {
+    // console.log("Inside!!!");
+    // $(this).parents('.sliderComplete').children('button').removeClass('close').fadeIn(300);
+    //
+    // // The button, that was visible, goes on display none.
+    // $(this).addClass('close').fadeOut(300);
+    //
+    // // We do a fluid slider with the class '.turn'.
+    // $(this).parents('.sliderComplete').children('.wrapper').children('.slider').toggleClass('turn');
+    // });
 
-    // We do a fluid slider with the class '.turn'.
-    $(this).parents('.sliderComplete').children('.wrapper').children('.slider').toggleClass('turn');
-    });
+      //delete function for myitems
+      $('.deleteFunction').click(function(){
+          console.log("Del Item Reached");
+          var uid=$(this).attr('id').substring(7);
+          console.log(uid);
+          $.post("/item-delete", {id:uid},
+          function(data){
+          console.log(data);
+          location.reload(true);
+        });
+       });
 
 
       //interested function
       $('.interestedFunction').click(function(){
         console.log("Interested Item Reached");
         var uid=$(this).attr('id');
-
-        console.log(uid);
+        //console.log(uid);
+        //$.post( "/item-interested", { id: uid }, function(data){
+        //console.log(data);
+        //location.reload(true);
         $.ajax({
-            async: false,
-            url: '/item-interested',
-            type: 'get',
-            data:{"id": uid},
-            dataType: 'json'
-        }).success(function(data, textStatus, jqXHR){
-          console.log("HELLO");
-          console.log(data);
-          console.log(textStatus);
-        }).fail(function(xhr, status, error){
-            alert(status);
+         url: "/item-interested",
+         type: "get", //send it through get method
+         data: {
+           id: uid
+         },
+         success: function(response) {
+           //Do Something
+         },
+         error: function(xhr) {
+           //Do Something to handle error
+         }
         });
        });
 

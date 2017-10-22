@@ -149,30 +149,26 @@ router.post('/item-save', function (req, res) {
         }
     });
 });
-router.post('/item-delete', function (req, res) {
+router.post('/item-delete',function(req, res){
     var BuySellItem = require("../model/buySellItem");
-    BuySellItem.deleteOne({
-        "_id": ObjectId(req.body.id)
-    }).then(function () {
-        res.send(JSON.stringify({
-            "result": true
-        }));
-    }).catch(function () {
-        res.send(JSON.stringify({
-            "result": false
-        }));
-    });
-});
-router.get('/item-interested', function (req, res) {
-    var BuySellItem = require("../model/buySellItem");
-    BuySellItem.find({
-        "_id": ObjectId(req.body.id)
-    }).then(function (column) {
-        res.render('partials/myitem.hbs', {
-            data: column
+    BuySellItem.deleteOne({"_id": ObjectId(req.body.id)})
+        .then(function(){
+            res.send(JSON.stringify({"result": true}));
+        })
+        .catch(function(){
+            res.send(JSON.stringify({"result":false}));
         });
-    })
 });
+router.get('/item-interested',function(req, res){
+    var BuySellItem = require("../model/buySellItem");
+    //console.log("FUCK" + );
+    BuySellItem.find({"_id": ObjectId(req.param('id'))})
+         .then(function(column){
+          res.render('partials/mymodal.hbs', {
+            data: column
+          });
+        });
+      });
 // rest of routes/index.js
 /*myitems*/
 router.post("/interested", function (req, res) {

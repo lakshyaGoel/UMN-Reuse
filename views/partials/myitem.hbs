@@ -65,7 +65,7 @@
       <br>
       <br>
 
-<!-- <div class="columns  is-multiline">
+<div class="columns  is-multiline">
 {{#each uItem}}
     <div class="is-one-quarter column cardColumn">
         <div class="card">
@@ -93,7 +93,7 @@
             </div>
 
                 <!--Pop-up form-->
-                <!-- <div id="popUpFormV" class="modal" >
+                 <!-- <div id="popUpFormV" class="modal" >
                  <div class="modal-background"></div>
                  <div class="modal-card">
                    <header class="modal-card-head">
@@ -103,104 +103,14 @@
                    <section class="modal-card-body">
                      <p>YEAH</p>
 
-                    {{data}}
-
                    </section>
                    <footer class="modal-card-foot">
                      <button class="button" onclick="document.getElementById('popUpFormV').style.display='none'">Cancel</button>
                    </footer>
                  </div>
-                </div>
+                </div> -->
 
         </div>
     </div>
 {{/each}}
-</div> -->
-
-<h4>Liked By Me</h4>
-<!--slider test-->
-<!-- wrapperAll -->
-
-	<section class="wrapperAll">
-		<section class="wrapper">
-
-
-		</section>
-
-		<!--
-		This section will prevent bugs : it hide overflowing content.
-		The section is in position:relative; that way, buttons will be attach more easily.
-		 -->
-		<section class="sliderComplete">
-			<!--
-			The wrapper provides a good implementation of the code in responsive design.
-			"Latest Albums" and the slider are aligned with the wrapper.
-			 -->
-			<!-- Wrapper -->
-			<section class="wrapper">
-				<!-- ".slider" has a width greater than 100% to give way to all albums to align.  -->
-				<ul class="slider">
-          {{#each uItem}}
-					<li>
-            <div class="card">
-                <div class="card-image">
-                    <figure class="image is-4by3">
-                        <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-                    </figure>
-                </div>
-                <header class="card-header">
-                    <p class="card-header-title">
-                        {{name}}
-                    </p>
-                    <a href="#" class="card-header-icon" aria-label="more options">
-                      <span class="icon">
-                        <i class="fa fa-angle-down" aria-hidden="true"></i>
-                      </span>
-                    </a>
-                </header>
-                <div class="card-content">
-                    <div class="content">
-                        {{description}}
-                        <span class="price">${{price}}</span>
-                    </div>
-                </div>
-
-              </div>
-					  </li>
-            {{/each}}
-				  </ul>
-			</section>
-			<!-- End wrapper -->
-
-			<!--
-			The buttons on the outside of the section are crucial to be connected in position:absolute; to .sliderComplete.
-			 -->
-
-			<!--
-			The class "close" allows the button to be invisible without loading jQuery.
-			The layout will make it faster to load regardless of the connection.
-			 -->
-       <button title="before" class="close" name="slider">
- 				<svg version="1.1" id="left" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
- 					 viewBox="12.7 2.5 15.4 25" enable-background="new 12.7 2.5 15.4 25" height="24" xml:space="preserve">
- 				<g id="chevron-right">
- 					<polygon fill="#38373A" points="13,15 25,27 27.8,24.2 18.6,15 27.8,5.8 25,3 	"/>
- 				</g>
- 				</svg>
- 			</button>
-
- 			<!--
- 			".open" is on display:block; to be visible.
- 			 -->
- 			<button title="after" class="open" name="slider">
- 				<svg version="1.1" id="right" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
- 					 viewBox="12.7 2.5 15.4 25" enable-background="new 12.7 2.5 15.4 25" height="24" xml:space="preserve">
- 				<g id="chevron-right">
- 					<polygon fill="#38373A" points="15.8,3 13,5.8 22.2,15 13,24.2 15.8,27 27.8,15 	"/>
- 				</g>
- 				</svg>
- 			</button>
- 		</section>
- 		<!-- End sliderComplete -->
- 	</section>
- 	<!-- End wrapperAll -->
+</div>
