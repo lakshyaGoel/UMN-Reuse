@@ -5,13 +5,15 @@ CSCI 5117, Fall 2017, [assignment description](https://docs.google.com/document/
 ## App Info:
 
 * Team Name: val=n
-* App Name: TODO
-* App Link: <https://TODO.herokuapp.com/>
+* App Name: UMN Shuffler
+* App Link: <https://safe-gorge-65667.herokuapp.com/>
 
 ### Students
 
 * Lakshya Goel, goel0072@umn.edu
-* ...
+* Nishka Monteiro, monte299@umn.edu
+* Akifumi Nakamachi, nakam052@umn.edu
+* Vaybhav Shaw, shaw0162@umn.edu
 
 
 ## Key Features
@@ -31,15 +33,12 @@ along with a very brief caption:**
 
 
 ## External Dependencies
-
-**Document integrations with 3rd Party code or services here.
-Please do not document required libraries (e.g., Express, Bulma).**
-
-* Library or service name: description of use
-* ...
-
-**If there's anything else you would like to disclose about how your project
-relied on external code, expertise, or anything else, please disclose that
-here:**
-
-...
+jquery3.2.1: parsing dom, form processing
+multer: sending data from client to sever
+request: controlling http?. Maybe default to express. But to prevent plagiarism, I write that
+Sass: css preprocessor
+Ruby: to use Sass
+mongoDB: To store the data
+mongooseJS: To develop schemas for mongoDB
+auth0: Authentication library for User Sign Up and Sign In
+passport: Authentication middleware for node
