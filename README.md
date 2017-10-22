@@ -33,12 +33,12 @@ along with a very brief caption:**
 
 
 ## External Dependencies
-jquery3.2.1: parsing dom, form processing
-multer: sending data from client to sever
-request: controlling http?. Maybe default to express. But to prevent plagiarism, I write that
-Sass: css preprocessor
-Ruby: to use Sass
-mongoDB: To store the data
-mongooseJS: To develop schemas for mongoDB
-auth0: Authentication library for User Sign Up and Sign In
-passport: Authentication middleware for node
+* jquery3.2.1: parsing dom, form processing
+* multer: sending data from client to sever
+* request: controlling http?. Maybe default to express. But to prevent plagiarism, I write that
+* Sass: css preprocessor
+* Ruby: to use Sass
+* mongoDB: To store the data
+* mongooseJS: To develop schemas for mongoDB
+* auth0: Authentication library for User Sign Up and Sign In
+* passport: Authentication middleware for node
