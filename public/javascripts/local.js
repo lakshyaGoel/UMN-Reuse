@@ -1,5 +1,5 @@
 $(function(){
-    document.getElementById('popUpFormRS').style.display='none';
+    // document.getElementById('popUpFormRS').style.display='none';
     console.log('local.js ready');
     $('[name="slider"]').click(function() {
     console.log("Inside!!!");
