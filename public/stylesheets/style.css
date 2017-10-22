@@ -50,6 +50,7 @@
 .lgFooter {
   position: fixed;
   bottom: 0;
+  width: 100%;
   padding: 1rem 3rem 1rem; }
 
 /*
