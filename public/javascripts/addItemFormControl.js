@@ -56,7 +56,7 @@ $(function(){
 
 
         if(validationFlg){
-            //$("#itemForm").submit();
+            $("#itemForm").submit();
         }
     });
 });
