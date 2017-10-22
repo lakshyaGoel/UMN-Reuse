@@ -53,59 +53,12 @@
   width: 100%;
   padding: 1rem 3rem 1rem; }
 
-/*
-# How to use scss
+.hideMap {
+  display: none !important; }
 
-- If you are a window user,
-Read this article's 1 and 2.
-it is not necessary after the end of section2 of the article(Install Sass Using the Command Prompt)
-Well done!
+.showMap {
+  display: block !important; }
 
-Next, run
- `npm install -g grunt-cli`
- and
- `npm install`
-
-Finally, when you start writing scss,
-run
-
-`grunt`
-
-command in module-2-group-assignment-val-n-1, folder.
-
-it's automatically detect the change what you do and generate css.
-
-# How to write scss
-
-scss is really simple, if you don't want to learn, just put pure css code.
-It's scss!
-Or if you know more,
-try following scss(css) code!
-```
-body{
-  h1{
-  background-color: #0f0;
-   }
-}
-```
-Then, compile this scss, you could get following css
-
-```
-body h1{
-  background-color: #0f0;
-}
-```
-Does it make sense?
-Yes, the scss could use nest structure!
-
-Or, if you don't want to try,
-Anyway, you should write any of your css code in your name's scss file.
-
-when someone compile scss,
-the css is completely overwrite,
-so if you write any css in style.css,
-completely delete what you do!
-*/
 /*RESET*/
 /* https://meyerweb.com/eric/tools/css/reset/
 	   v2.0 | 20110126
