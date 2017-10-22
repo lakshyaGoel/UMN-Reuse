@@ -21,8 +21,8 @@
                         <figure class="image is-4by3">
 	                        {{#each photo}}
 		                        {{#if localFlg}}
-			                        <img src="{{path}}" alt="Placeholder image"  onerror="imgError(this);">
-		                        {{else}}{{! in heroku }}
+			                        <img src="{{path}}" alt="Placeholder image">
+		                        {{else}}
 			                        <img src="{{path}}" alt="Placeholder image"  onerror="imgError(this);">
 		                        {{/if}}
 	                        {{else}}
