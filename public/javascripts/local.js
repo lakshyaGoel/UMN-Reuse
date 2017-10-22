@@ -150,4 +150,9 @@ $(function(){
             $(this).removeClass("cardColumn").removeClass("is-one-quarter").addClass("is-half");
         });
     });
+
+    // add Item form photo button wrapping
+    $(".photoButton").on("click", function(){
+        $("#photo").trigger("click");
+    })
 });
