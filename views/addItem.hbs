@@ -17,8 +17,10 @@ and The item id parameter specify item by id. use object id as item id.
 			<form  action="/add/{{itemType}}" enctype="multipart/form-data"  method="post" id="itemForm">
 
 			{{input "Item Name" "text" id="itemName" required=true placeHolder="put Item Name here."}}
+				<div class="name-notification is-hidden"></div>
 				{{#unless isRoadside}}
 			{{input "Item Price" "text" id="itemPrice" required=true placeHolder="put Item Price here."  isNum=true}}
+					<div class="price-notification is-hidden"></div>
 				{{/unless}}
 				{{input "Item Description" "textarea"  id="description" placeHolder="put item description here."}}
 				<div class="field is-horizontal">
