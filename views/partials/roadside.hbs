@@ -1,6 +1,10 @@
 <div class="main">
 	{{#if login}}
-	<a href="./add/roadside"><span class="lgSpan">+ Add Roadside Sighting</span></a>
+    <div class="lgAddSearchDiv">
+        <div class="lgAddDiv">
+            <a href="./add/roadside"><span class="lgSpan lgAddButton">+ Add Roadside Sighting</span></a>
+        </div>
+    </div>
 	{{/if}}
 	<div class="columns is-multiline lgColumn">
 		{{#each itemsRS}}

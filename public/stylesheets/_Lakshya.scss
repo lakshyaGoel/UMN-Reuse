@@ -28,3 +28,23 @@
 .lgColumn{
     padding-top: 2rem;
 }
+.lgAddSearchDiv{
+    display: flex;
+}
+.lgAddDiv{
+    padding-top: 0.2rem;
+}
+.lgSearchDiv{
+    position: absolute;
+    right: 0;
+}
+.lgSearchForm{
+    display: inline-flex;
+}
+.lgSubmitSearch{
+    margin-left: 1rem;
+}
+.lgAddButton{
+    background: hsl(217, 71%, 53%);
+    border-color: hsl(217, 71%, 53%);
+}
