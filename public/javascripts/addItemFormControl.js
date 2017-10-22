@@ -39,18 +39,21 @@ $(function(){
             validationFlg = false;
             putNotification(".name-notification", "this value could not blank!");
         }
-        if(!isBlank("#itemPrice")){
-            validationFlg = false;
-            var message = "This item could not blank ";
-            if(!isNum("#itemPrice")){
+
+        if(window.location.href.indexOf("item") != -1){
+            if(!isBlank("#itemPrice")){
                 validationFlg = false;
-                message += "and need valid number";
-            }
-            putNotification(".price-notification", message);
-        }else{
-            if(!isNum("#itemPrice")){
-                validationFlg = false;
-                putNotification(".price-notification", "Put the valid number");
+                var message = "This item could not blank ";
+                if(!isNum("#itemPrice")){
+                    validationFlg = false;
+                    message += "and need valid number";
+                }
+                putNotification(".price-notification", message);
+            }else{
+                if(!isNum("#itemPrice")){
+                    validationFlg = false;
+                    putNotification(".price-notification", "Put the valid number");
+                }
             }
         }
 

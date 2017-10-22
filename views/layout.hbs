@@ -7,6 +7,14 @@
 	<link rel='stylesheet' href='/stylesheets/style.css'/>
 	<link rel="icon" href="/public/favicon.ico"/>
 </head>
+<script>
+	// client side javascript that have to load before loading whole page!
+	function imgError(image){
+		image.onerror = "";
+		image.src = "https://bulma.io/images/placeholders/1280x960.png";
+		return true;
+	}
+</script>
 <body>
 <div id="wrap">
 	{{> navbar}}

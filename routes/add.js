@@ -71,10 +71,9 @@ router.post('/:itemType/', upload.single('photo'),function(req, res, next){
 
         // TODO: item validation
         req.checkBody('itemName', 'Item name is blank! Fill out please.').notEmpty();
-        req.checkBody("itemPrice", "Price should add valid number").matches(/^([1-9]\d*|0)(\.\d+)?$/);
-        //req.checkBody('itemPrice', 'Item price is illegal! Fill out number please!');
 
         if(req.params.itemType == "item"){// add buySell item to the database
+            req.checkBody("itemPrice", "Price should add valid number").matches(/^([1-9]\d*|0)(\.\d+)?$/);
             function saveData(){
                 var BuySellItem = require("../model/buySellItem");
                 var item = new BuySellItem();

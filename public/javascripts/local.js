@@ -120,5 +120,6 @@ $(function () {
     // add Item form photo button wrapping
     $(".photoButton").on("click", function () {
         $("#photo").trigger("click");
-    })
+    });
+
 });

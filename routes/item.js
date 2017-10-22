@@ -60,6 +60,10 @@ router.get('/', function (req, res, next) {
                 flag = true;
             }
             a["isUser"] = flag;
+            // image file path modify
+            for (var i = 0; i < a["photo"].length; i++) {
+                a["photo"][i]["path"] = a["photo"][i]["path"].replace("public", "");
+            }
             itemDataRS.push(a);
         });
         Item.find().exec(function (err, column) {
@@ -89,7 +93,7 @@ router.get('/', function (req, res, next) {
                     flag = true;
                 }
                 a["isUser"] = flag;
-                // file path modify
+                // image file path modify
                 for (var i = 0; i < a["photo"].length; i++) {
                     a["photo"][i]["path"] = a["photo"][i]["path"].replace("public", "");
                 }
