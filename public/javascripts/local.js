@@ -82,23 +82,6 @@ $(function(){
     });
 
 
-    // function formValidate
-    function isNotBlank(jQuerySelector){
-        var result = false;
-        if($(jQuerySelector).val() != ""){
-            result = true;
-        }
-        return result;
-    }
-
-    // function formValidate
-    function isNum(jQuerySelector){
-        var result = false;
-        if(/[0-9]+/.test($(jQuerySelector).val())){
-            result = true;
-        }
-        return result;
-    }
 
     // item save
     $(".item-save").on("click", function(){
