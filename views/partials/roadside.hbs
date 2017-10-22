@@ -1,111 +1,82 @@
 <div class="main">
-	{{#if login}}
-    <div class="lgAddSearchDiv">
-        <div class="lgAddDiv">
-            <a href="./add/roadside"><span class="lgSpan lgAddButton">+ Add Roadside Sighting</span></a>
+    {{#if login}}
+        <div class="lgAddSearchDiv">
+            <div class="lgAddDiv">
+                <a href="./add/roadside"><span class="lgSpan lgAddButton">+ Add Roadside Sighting</span></a>
+            </div>
         </div>
-    </div>
-	{{/if}}
-	<div class="columns is-multiline lgColumn">
-		{{#each itemsRS}}
-			<div class="is-one-quarter column cardColumn">
-				<div class="card">
-					<div class="card-image">
-						<figure class="image is-4by3">
-							<img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image">
-						</figure>
-					</div>
-					<header class="card-header">
-						<p class="card-header-title">
-							{{name}}
-						</p>
-						<a href="#" class="card-header-icon" aria-label="more options">
-                          <span class="icon">
+    {{/if}}
+    <div class="columns is-multiline lgColumn">
+        {{#each itemsRS}}
+        <div class="is-one-quarter column cardColumn">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image is-4by3"> <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image"> </figure>
+                </div>
+                <header class="card-header">
+                    <p class="card-header-title"> {{name}} </p>
+                    <a href="#" class="card-header-icon" aria-label="more options"> <span class="icon">
                             <i class="fa fa-angle-down" aria-hidden="true"></i>
-                          </span>
-						</a>
-					</header>
-					<div class="card-content">
-						<div class="content">
-							{{description}}
-							s
-						</div>
-					</div>
-					{{#if loggedIn}}
-						<footer class="card-footer">
-							{{#unless isUser}}
-								<a class="card-footer-item" onclick="initMaprs()">
-									Get Location {{location.coordinates}}
-									{{!--TODO: how to show location? --}}
+                          </span> </a>
+                </header>
+                <div class="card-content">
+                    <div class="content"> {{description}} s </div>
+                </div>
+                {{#if loggedIn}}
+                <footer class="card-footer">
+                    {{#unless isUser}}
+                    <a class="card-footer-item" id="locationLink" onclick="return initMaprs(event)">
+									Get Location: {{location.coordinates}}
 								</a>
-								<div id="popUpFormRS" class="modal">
-									<div class="modal-background"></div>
-									<div class="modal-card">
-										<header class="modal-card-head">
-											<p class="modal-card-title">The Location on Map</p>
-											<button onclick="document.getElementById('popUpFormRS').style.display='none'" class="delete" aria-label="close"></button>
-										</header>
-										<section class="modal-card-body">
+                    <div id="popUpFormRS" class="modal">
+                        <div class="modal-background"></div>
+                        <div class="modal-card">
+                            <header class="modal-card-head">
+                                <p class="modal-card-title">The Location on Map</p>
+                                <button onclick="$('#popUpFormRS').addClass('hideMap');$('#popUpFormRS').removeClass('showMap');" class="delete" aria-label="close"></button>
+                            </header>
+                            <section class="modal-card-body">
+                                <div id="map" class="fullwidth"></div>
+                                <script>
+                                    var map;
 
-											<div id="map" class="fullwidth" ></div>
-											<!-- <div id="current">Marker is Currently at: </div> -->
-											<script>
-												var map;
-
-																	function initMaprs() {
-																		document.getElementById('popUpFormRS').style.display='block';
-																		var a = [
-																			{{#each location}}
-																								{coordinate: [{{coordinates}}]},
-																								{type:"{{type}}"}
-																							{{/each}}
-																							];
-
-																		var mapCoordinates = a[0].coordinate;
-																		console.log(mapCoordinates);
-																		var geocoder = new google.maps.Geocoder;
-        														var infowindow = new google.maps.InfoWindow;
-																		var map = new google.maps.Map(document.getElementById('map'), {
-																				zoom: 14,
-																				center: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1]),
-																				//center: new google.maps.LatLng(),
-																				mapTypeId: google.maps.MapTypeId.ROADMAP
-																		});
-
-																		var myMarker = new google.maps.Marker({
-																				//position: new google.maps.LatLng(44.974, -93.237),
-																				position: new google.maps.LatLng(mapCoordinates[0],mapCoordinates[1]),
-																				draggable: false
-																		});
-
-
-
-
-													map.setCenter(myMarker.position);
-													myMarker.setMap(map);
-
-
-												}
-
-											</script>
-
-										</section>
-										<footer class="modal-card-foot">
-
-											<button class="button" onclick="document.getElementById('popUpFormRS').style.display='none'">Cancel</button>
-										</footer>
-									</div>
-								</div>
-							{{/unless}}
-							{{#if isUser}}
-								<a href="#" class="card-footer-item item-delete">Delete</a>
-							{{/if}}
-							<span class="is-hidden itemID">{{_id}}</span>
-						</footer>
-					{{/if}}
-				</div>
-			</div>
-		{{/each}}
-	</div>
-
+                                    function initMaprs(event) {
+                                        $("#popUpFormRS").removeClass("hideMap");
+                                        $("#popUpFormRS").addClass("showMap");
+                                        var mapCoordinates = [];
+                                        mapCoordinates.push(parseFloat(event.currentTarget.text.split(" ")[2].replace(/\s+/g, '').split(',')[0]));
+                                        mapCoordinates.push(parseFloat(event.currentTarget.text.split(" ")[2].replace(/\s+/g, '').split(',')[1]));
+                                        console.log(mapCoordinates);
+                                        var geocoder = new google.maps.Geocoder;
+                                        var infowindow = new google.maps.InfoWindow;
+                                        var map = new google.maps.Map(document.getElementById('map'), {
+                                            zoom: 13
+                                            , center: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1])
+                                            , mapTypeId: google.maps.MapTypeId.ROADMAP
+                                        });
+                                        var myMarker = new google.maps.Marker({
+                                            position: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1])
+                                            , draggable: false
+                                        });
+                                        map.setCenter(myMarker.position);
+                                        myMarker.setMap(map);
+                                    }
+                                </script>
+                            </section>
+                            <footer class="modal-card-foot">
+                                <button class="button" onclick="$('#popUpFormRS').addClass('hideMap');$('#popUpFormRS').removeClass('showMap');">Cancel</button>
+                            </footer>
+                        </div>
+                    </div>
+                    {{/unless}}
+                    {{#if isUser}}
+                        <a href="#" class="card-footer-item item-delete">Delete</a>
+                    {{/if}}
+                    <span class="is-hidden itemID">{{_id}}</span> 
+                </footer>
+                {{/if}}
+            </div>
+        </div>
+        {{/each}}
+    </div>
 </div>
