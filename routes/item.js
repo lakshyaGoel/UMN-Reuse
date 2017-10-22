@@ -181,7 +181,7 @@ router.post('/search', function (req, res) {
     var productName = req.body.ProductName;
     var BuySellItem = require("../model/buySellItem");
     BuySellItem.find({
-        "name": productName
+        "name": new RegExp(".*" + productName + ".*" , "i")
     }).then(function (column) {
         var isLoggedIn;
         var userID;
