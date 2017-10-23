@@ -154,24 +154,27 @@ router.post('/item-save', function (req, res) {
     });
 });
 router.post('/item-delete',function(req, res){
-    var BuySellItem = require("../model/buySellItem");
-    BuySellItem.deleteOne({"_id": ObjectId(req.body.id)})
-        .then(function(){
-            res.send(JSON.stringify({"result": true}));
-        })
-        .catch(function(){
-            res.send(JSON.stringify({"result":false}));
-        });
+    console.log("detect:", req.body.isRoadside);
+    if(req.body.isRoadside){
+       var RoadsideItem = require("../model/roadsideItem");
+        RoadsideItem.deleteOne({"_id": ObjectId(req.body.id)})
+            .then(function(){
+                res.send(JSON.stringify({"result": true}));
+            }).catch(function(){
+                res.send(JSON.stringify({"result":false}));
+        });// end RoadsideItem.deleteOne()
+    }else{
+        var BuySellItem = require("../model/buySellItem");
+        BuySellItem.deleteOne({"_id": ObjectId(req.body.id)})
+            .then(function(){
+                res.send(JSON.stringify({"result": true}));
+            })
+            .catch(function(){
+                res.send(JSON.stringify({"result":false}));
+        });// end BuySellItem.deleteOne()
+    }
 });
-router.get('/item-interested',function(req, res){
-    var BuySellItem = require("../model/buySellItem");
-    BuySellItem.find({"_id": ObjectId(req.param('id'))})
-         .then(function(column){
-          res.render('partials/mymodal.hbs', {
-            data: column
-          });
-        });
-      });
+
 // rest of routes/index.js
 /*myitems*/
 router.post("/interested", function (req, res) {

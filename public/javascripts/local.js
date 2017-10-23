@@ -4,27 +4,18 @@ $(function () {
     $('#popUpFormRS').removeClass('showMap');
     //delete function for myitems
     $('.deleteFunction').click(function () {
+        console.log("Del Item Reached");
         var uid = $(this).attr('id').substring(7);
+        console.log(uid);
         $.post("/item-delete", {
             id: uid
         }, function (data) {
+            console.log(data);
             location.reload(true);
         });
     });
-    //interested function
-    $('.interestedFunction').click(function () {
-        var uid = $(this).attr('id');
-        $.ajax({
-            url: "/item-interested?id="+uid
-            , type: "get"
-            , success: function (response) {
-                //Do Something
-            }
-            , error: function (xhr) {
-                //Do Something to handle error
-            }
-        });
-    });
+
+
     // Begin: tab control
     $(".switch-BuySell, .switch-Roadside, .switch-MyItems").on("click", function () {
         var label = $(this).attr("class").replace("switch-", "");
@@ -39,11 +30,14 @@ $(function () {
         });
         $("#section-" + label).removeClass("is-hidden");
     }); // end: $(".switch-BuySell, .switch-Roadside, .switch-MyItems").on("click", function(){
-    // END: tab control
+
+
     // open add Item Modal in MyItem tab
     $("#openItemModal").on("click", function () {
         $("#addItem").addClass("is-active");
     });
+
+
     // close add Item Modal when clicking close button
     $("#closeAddItemModal").on("click", function () {
         $("#addItem").removeClass("is-active");
@@ -54,6 +48,8 @@ $(function () {
             $("#addItem").removeClass("is-active");
         }
     });
+
+
     // item save
     $(".item-save").on("click", function () {
         var itemId = $(this).parent().find(".itemID").text();
@@ -72,6 +68,8 @@ $(function () {
             alert(status);
         });
     });
+
+
     // item delete
     $(".item-delete").on("click", function () {
         var itemId = $(this).parent().find(".itemID").text();
@@ -96,6 +94,8 @@ $(function () {
             alert(status);
         });
     });
+
+
     // add saved item card to myItem tab page.
     $(".switch-MyItems").on("click", function () {
         var cardColumnList = [];
@@ -112,9 +112,32 @@ $(function () {
             $(this).removeClass("cardColumn").removeClass("is-one-quarter").addClass("is-half");
         });
     });
+
+
     // add Item form photo button wrapping
     $(".photoButton").on("click", function () {
         $("#photo").trigger("click");
+    });
+
+
+    // myitem customer showing modal
+    $(".my-item-card-customer-button").on("click", function(){
+        var $parent = $(this).parent();
+        var userList = $parent.find(".save-customer-list").html();
+        $(".user-list").html(userList);
+        $("#popUpFormV").addClass("is-active");
+    });
+
+
+    // close add Item Modal when clicking close button
+    $(".close-modal").on("click", function () {
+        $("#popUpFormV").removeClass("is-active");
+    });
+    // close add Item Modal when clicking outside of the modal
+    $("#popUpFormV .modal-background").on("click", function (event) {
+        if (!$(event.target).closest('.addItemModalCard').length) {
+            $("#popUpFormV").removeClass("is-active");
+        }
     });
 
 });

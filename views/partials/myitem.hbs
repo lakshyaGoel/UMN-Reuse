@@ -1,15 +1,26 @@
-<head>
-  <link rel = "stylesheet" type = "text/css" href = "style.css" />
-  <script>
-  </script>
-</head>
-<div class="columns">
-  <div class="column">
-    <center>
-    <h1 class="title is-5">Items Posted</h1>
+<!--Pop-up form-->
+<div id="popUpFormV" class="modal" >
+	<div class="modal-background"></div>
+	<div class="modal-card">
+		<header class="modal-card-head">
+			<p class="modal-card-title">People Interested In Your Item</p>
+			<button class="delete close-modal" aria-label="close"></button>
+		</header>
+		<section class="modal-card-body">
+			<p>Add this item by following people...</p>
+			<div class="user-list content">
 
+			</div>
+		</section>
+	</div>
+</div>
+
+<div class="columns">
+  <div class="column item-posted">
+    <h1 class="title is-5">Items Posted</h1>
+	  <div class="columns is-multiline">
       {{#each personalitems}}
-          <div class="is-half column cardColumn">
+          <div class="column cardColumn">
               <div class="card">
                   <div class="card-image">
                       <figure class="image is-4by3">
@@ -34,41 +45,33 @@
                       </div>
                   </div>
                   <footer class="card-footer">
-                      <a id="#" class="card-footer-item"><span class="deleteFunction" id="delete_{{this._id}}">Delete</span></a>
-                      <a id="#" class="card-footer-item"><span class="interestedFunction" id="{{this._id}}">Customers</span></a>
+                      <a class="card-footer-item"><span class="deleteFunction" id="delete_{{this._id}}">Delete</span></a>
+                      <a class="card-footer-item my-item-card-customer-button">Customers</a>
+	                  <span class="is-hidden save-customer-list">
+		                  {{#if interested}}
+		                  <ul>
+			                  {{#each interested}}
+				                  <li>{{this}}</li>
+			                  {{/each}}
+		                  </ul>
+		                  {{else}}
+			                  No people add this item...
+		                  {{/if}}
+	                  </span>
                   </footer>
-
-                      <!--Pop-up form-->
-                      <div id="popUpFormV" class="modal" >
-                       <div class="modal-background"></div>
-                       <div class="modal-card">
-                         <header class="modal-card-head">
-                           <p class="modal-card-title">People Interested In Your Item</p>
-                           <button class="delete" aria-label="close" onclick="document.getElementById('popUpFormV').style.display='none'"></button>
-                         </header>
-                         <section class="modal-card-body">
-                           <p>YEAH</p>
-
-                          {{data}}
-
-                         </section>
-                         <footer class="modal-card-foot">
-                           <button class="button" onclick="document.getElementById('popUpFormV').style.display='none'">Cancel</button>
-                         </footer>
-                       </div>
-                      </div>
-
               </div>
           </div>
-
       {{/each}}
-    </center>
+	  </div>
   </div>
+	{{!-- END Item posted column--}}
+
+
   <div class="column">
-    <center>
     <h1 class="title is-5">Items Saved</h1>
+	  <div class="columns is-multiline">
     {{#each uItem}}
-        <div class="is-half column cardColumn">
+        <div class="column cardColumn">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">
@@ -88,37 +91,12 @@
                 <div class="card-content">
                     <div class="content">
                         {{description}}
-
                         <span class="price">${{price}}</span>
                     </div>
                 </div>
-
-                    <!--Pop-up form-->
-                     <!-- <div id="popUpFormV" class="modal" >
-                     <div class="modal-background"></div>
-                     <div class="modal-card">
-                       <header class="modal-card-head">
-                         <p class="modal-card-title">People Interested In Your Item</p>
-                         <button class="delete" aria-label="close" onclick="document.getElementById('popUpFormV').style.display='none'"></button>
-                       </header>
-                       <section class="modal-card-body">
-                         <p>YEAH</p>
-
-                       </section>
-                       <footer class="modal-card-foot">
-                         <button class="button" onclick="document.getElementById('popUpFormV').style.display='none'">Cancel</button>
-                       </footer>
-                     </div>
-                    </div> -->
-
             </div>
         </div>
     {{/each}}
-  </center>
+	  </div>
   </div>
-</div>
-</div>
-<br>
-<br>
-<!--<div class="columns  is-multiline">-->
 </div>
