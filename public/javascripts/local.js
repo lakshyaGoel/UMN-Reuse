@@ -86,13 +86,19 @@ $(function () {
     // item delete
     $(".item-delete").on("click", function () {
         var itemId = $(this).parent().find(".itemID").text();
+        var isRoadside = false;
         var $item = $(this);
+
+        if(!$("section-Roadside").hasClass("is-hidden")){
+            isRoadside = true;
+        }
         $.ajax({
             async: false
             , url: '/item-delete'
             , type: 'post'
             , data: {
-                "id": itemId
+                "id": itemId,
+                "isRoadside": isRoadside
             }
             , dataType: 'json'
         }).done(function (res) {
