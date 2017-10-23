@@ -1,3 +1,39 @@
+<p>Select current location</p>
+<div id="map" class="fullwidth" ></div>
+<div id="current">Marker is Currently at: Current Lat: 44.974 Current Lng: -93.237</div>
+<script>
+  var map;
+  function initMaprs() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 14,
+      center: new google.maps.LatLng(44.974, -93.237),
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+
+    var myMarker = new google.maps.Marker({
+      position: new google.maps.LatLng(44.974, -93.237),
+      draggable: true
+    });
+    google.maps.event.addListener(myMarker, 'dragend', function (evt) {
+      $("#lon").val(evt.latLng.lng().toFixed(3));
+      $("#lat").val(evt.latLng.lat().toFixed(3));
+      document.getElementById('current').innerHTML = '<p>Marker dropped: Current Lat: ' + evt.latLng.lat().toFixed(3) + ' Current Lng: ' + evt.latLng.lng().toFixed(3) + '</p>';
+    });
+
+    google.maps.event.addListener(myMarker, 'dragstart', function (evt) {
+      document.getElementById('current').innerHTML = '<p>Marker is Currently at: Current Lat: 44.974 Current Lng: -93.237</p>';
+      $("#lon").val( evt.latLng.lng().toFixed(3));
+      $("#lat").val(evt.latLng.lat().toFixed(3));
+    });
+
+    map.setCenter(myMarker.position);
+    myMarker.setMap(map);
+  }
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHlhlAslc3THDNUBE7HZ18Q5brP_dk950&callback=initializeMap">
+</script>
+<a href="./item-findNearMe">Find Near me</a>
 <div class="main">
     {{#if login}}
         <div class="lgAddSearchDiv">
@@ -37,7 +73,7 @@
                 <footer class="card-footer">
                     {{#unless isUser}}
                     <a class="card-footer-item" id="locationLink" onclick="return initMaprs(event)">
-									Get Location<div class="hideMap"> {{location.coordinates}} </div>
+									Get Location: {{location.coordinates}}
 								</a>
                     <div id="popUpFormRS" class="modal">
                         <div class="modal-background"></div>
@@ -52,28 +88,25 @@
                                     var map;
 
                                     function initMaprs(event) {
-                                        if(event){
-                                            $("#popUpFormRS").removeClass("hideMap");
-                                            $("#popUpFormRS").addClass("showMap");
-                                            var mapCoordinates = [];
-                                            var htmlText = event.currentTarget.text.split(" ");
-                                            var htmlTextLength = htmlText.length;
-                                            mapCoordinates.push(parseFloat(htmlText[htmlTextLength-2].split(',')[0]));
-                                            mapCoordinates.push(parseFloat(htmlText[htmlTextLength-2].split(',')[1]));
-                                            var geocoder = new google.maps.Geocoder;
-                                            var infowindow = new google.maps.InfoWindow;
-                                            var map = new google.maps.Map(document.getElementById('map'), {
-                                                zoom: 13
-                                                , center: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1])
-                                                , mapTypeId: google.maps.MapTypeId.ROADMAP
-                                            });
-                                            var myMarker = new google.maps.Marker({
-                                                position: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1])
-                                                , draggable: false
-                                            });
-                                            map.setCenter(myMarker.position);
-                                            myMarker.setMap(map);
-                                        }
+                                        $("#popUpFormRS").removeClass("hideMap");
+                                        $("#popUpFormRS").addClass("showMap");
+                                        var mapCoordinates = [];
+                                        mapCoordinates.push(parseFloat(event.currentTarget.text.split(" ")[2].replace(/\s+/g, '').split(',')[0]));
+                                        mapCoordinates.push(parseFloat(event.currentTarget.text.split(" ")[2].replace(/\s+/g, '').split(',')[1]));
+                                        console.log(mapCoordinates);
+                                        var geocoder = new google.maps.Geocoder;
+                                        var infowindow = new google.maps.InfoWindow;
+                                        var map = new google.maps.Map(document.getElementById('map'), {
+                                            zoom: 13
+                                            , center: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1])
+                                            , mapTypeId: google.maps.MapTypeId.ROADMAP
+                                        });
+                                        var myMarker = new google.maps.Marker({
+                                            position: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1])
+                                            , draggable: false
+                                        });
+                                        map.setCenter(myMarker.position);
+                                        myMarker.setMap(map);
                                     }
                                 </script>
                             </section>
