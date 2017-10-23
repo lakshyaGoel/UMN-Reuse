@@ -154,25 +154,14 @@ router.post('/item-save', function (req, res) {
     });
 });
 router.post('/item-delete',function(req, res){
-    console.log("detect:", req.body.isRoadside);
-    if(req.body.isRoadside){
-       var RoadsideItem = require("../model/roadsideItem");
-        RoadsideItem.deleteOne({"_id": ObjectId(req.body.id)})
-            .then(function(){
-                res.send(JSON.stringify({"result": true}));
-            }).catch(function(){
-                res.send(JSON.stringify({"result":false}));
-        });// end RoadsideItem.deleteOne()
-    }else{
-        var BuySellItem = require("../model/buySellItem");
-        BuySellItem.deleteOne({"_id": ObjectId(req.body.id)})
-            .then(function(){
-                res.send(JSON.stringify({"result": true}));
-            })
-            .catch(function(){
-                res.send(JSON.stringify({"result":false}));
-        });// end BuySellItem.deleteOne()
-    }
+    var BuySellItem = require("../model/buySellItem");
+    BuySellItem.deleteOne({"_id": ObjectId(req.body.id)})
+        .then(function(){
+            res.send(JSON.stringify({"result": true}));
+        })
+        .catch(function(){
+            res.send(JSON.stringify({"result":false}));
+        });
 });
 router.get('/item-interested',function(req, res){
     var BuySellItem = require("../model/buySellItem");
@@ -184,6 +173,134 @@ router.get('/item-interested',function(req, res){
           });
         });
       });
+router.get('/item-nearMe',function(req, res){
+      var RSItem = require("../model/roadsideItem");
+      var itemDataRS = [];
+      RSItem.find().exec(function (err, column) {
+          var isLoggedIn;
+          var userID;
+          if (req.user) {
+              isLoggedIn = true;
+              userID = req.user.displayName;
+          }
+          else {
+              isLoggedIn = false;
+              userID = "NA";
+          }
+          column.forEach(function (x) {
+              var a = JSON.parse(JSON.stringify(x));
+              //console.log(a);
+              a["loggedIn"] = isLoggedIn;
+              a["userEmailID"] = userID;
+              //a.location[0].coordinates = JSON.parse(JSON.stringify(a.location[0].coordinates));
+              var flag = false;
+              if (userID == a["userId"]) {
+                  flag = true;
+              }
+              a["isUser"] = flag;
+              // image file path modify
+              for (var i = 0; i < a["photo"].length; i++) {
+                  a["photo"][i]["path"] = a["photo"][i]["path"].replace("public", "");
+              }
+              itemDataRS.push(a);
+          });
+        })
+      .then(function(column){
+          res.render('partials/nearMe.hbs', {
+          itemsRS: column
+          });
+      });
+  });
+  router.get('/item-findNearMe',function(req, res){
+        var RSItem = require("../model/roadsideItem");
+        var itemDataRS = [];
+        RSItem.find(
+   {
+     "location":
+       { $near :
+          {
+            $geometry: { "type": "Point",  "coordinates": [ -93.237,44.974 ] },
+            $minDistance: 1000,
+            $maxDistance: 5000
+          }
+       }
+   }
+).exec(function (err, column) {
+            var isLoggedIn;
+            var userID;
+            if (req.user) {
+                isLoggedIn = true;
+                userID = req.user.displayName;
+            }
+            else {
+                isLoggedIn = false;
+                userID = "NA";
+            }
+            if(column){
+              column.forEach(function (x) {
+                  var a = JSON.parse(JSON.stringify(x));
+                  //console.log(a);
+                  a["loggedIn"] = isLoggedIn;
+                  a["userEmailID"] = userID;
+                  //a.location[0].coordinates = JSON.parse(JSON.stringify(a.location[0].coordinates));
+                  var flag = false;
+                  if (userID == a["userId"]) {
+                      flag = true;
+                  }
+                  a["isUser"] = flag;
+                  // image file path modify
+                  for (var i = 0; i < a["photo"].length; i++) {
+                      a["photo"][i]["path"] = a["photo"][i]["path"].replace("public", "");
+                  }
+                  itemDataRS.push(a);
+              })
+
+          .then(function(column){
+              res.render('partials/nearMe.hbs', {
+              itemsRS: column
+              });
+          });
+            }else{
+              var RSItem = require("../model/roadsideItem");
+              var itemDataRS = [];
+              RSItem.find().exec(function (err, column) {
+                  var isLoggedIn;
+                  var userID;
+                  if (req.user) {
+                      isLoggedIn = true;
+                      userID = req.user.displayName;
+                  }
+                  else {
+                      isLoggedIn = false;
+                      userID = "NA";
+                  }
+                  column.forEach(function (x) {
+                      var a = JSON.parse(JSON.stringify(x));
+                      //console.log(a);
+                      a["loggedIn"] = isLoggedIn;
+                      a["userEmailID"] = userID;
+                      //a.location[0].coordinates = JSON.parse(JSON.stringify(a.location[0].coordinates));
+                      var flag = false;
+                      if (userID == a["userId"]) {
+                          flag = true;
+                      }
+                      a["isUser"] = flag;
+                      // image file path modify
+                      for (var i = 0; i < a["photo"].length; i++) {
+                          a["photo"][i]["path"] = a["photo"][i]["path"].replace("public", "");
+                      }
+                      itemDataRS.push(a);
+                  });
+                })
+              .then(function(column){
+                  res.render('partials/nearMe.hbs', {
+                  itemsRS: column
+                  });
+              });
+            }
+          });
+    });
+
 // rest of routes/index.js
 /*myitems*/
 router.post("/interested", function (req, res) {
@@ -244,5 +361,5 @@ router.post('/search', function (req, res) {
             , isSearch: true
         });
     });
-});
+})
 module.exports = router;
