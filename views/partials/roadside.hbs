@@ -36,7 +36,7 @@
                 <footer class="card-footer">
                     {{#unless isUser}}
                     <a class="card-footer-item" id="locationLink" onclick="return initMaprs(event)">
-									Get Location: {{location.coordinates}}
+									Get Location<div class="hideMap"> {{location.coordinates}} </div>
 								</a>
                     <div id="popUpFormRS" class="modal">
                         <div class="modal-background"></div>
@@ -51,25 +51,28 @@
                                     var map;
 
                                     function initMaprs(event) {
-                                        $("#popUpFormRS").removeClass("hideMap");
-                                        $("#popUpFormRS").addClass("showMap");
-                                        var mapCoordinates = [];
-                                        mapCoordinates.push(parseFloat(event.currentTarget.text.split(" ")[2].replace(/\s+/g, '').split(',')[0]));
-                                        mapCoordinates.push(parseFloat(event.currentTarget.text.split(" ")[2].replace(/\s+/g, '').split(',')[1]));
-                                        console.log(mapCoordinates);
-                                        var geocoder = new google.maps.Geocoder;
-                                        var infowindow = new google.maps.InfoWindow;
-                                        var map = new google.maps.Map(document.getElementById('map'), {
-                                            zoom: 13
-                                            , center: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1])
-                                            , mapTypeId: google.maps.MapTypeId.ROADMAP
-                                        });
-                                        var myMarker = new google.maps.Marker({
-                                            position: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1])
-                                            , draggable: false
-                                        });
-                                        map.setCenter(myMarker.position);
-                                        myMarker.setMap(map);
+                                        if(event){
+                                            $("#popUpFormRS").removeClass("hideMap");
+                                            $("#popUpFormRS").addClass("showMap");
+                                            var mapCoordinates = [];
+                                            var htmlText = event.currentTarget.text.split(" ");
+                                            var htmlTextLength = htmlText.length;
+                                            mapCoordinates.push(parseFloat(htmlText[htmlTextLength-2].split(',')[0]));
+                                            mapCoordinates.push(parseFloat(htmlText[htmlTextLength-2].split(',')[1]));
+                                            var geocoder = new google.maps.Geocoder;
+                                            var infowindow = new google.maps.InfoWindow;
+                                            var map = new google.maps.Map(document.getElementById('map'), {
+                                                zoom: 13
+                                                , center: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1])
+                                                , mapTypeId: google.maps.MapTypeId.ROADMAP
+                                            });
+                                            var myMarker = new google.maps.Marker({
+                                                position: new google.maps.LatLng(mapCoordinates[0], mapCoordinates[1])
+                                                , draggable: false
+                                            });
+                                            map.setCenter(myMarker.position);
+                                            myMarker.setMap(map);
+                                        }
                                     }
                                 </script>
                             </section>
