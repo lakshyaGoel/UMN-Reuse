@@ -174,16 +174,7 @@ router.post('/item-delete',function(req, res){
         });// end BuySellItem.deleteOne()
     }
 });
-router.get('/item-interested',function(req, res){
-    var BuySellItem = require("../model/buySellItem");
-    //console.log("FUCK" + );
-    BuySellItem.find({"_id": ObjectId(req.param('id'))})
-         .then(function(column){
-          res.render('partials/mymodal.hbs', {
-            data: column
-          });
-        });
-      });
+
 // rest of routes/index.js
 /*myitems*/
 router.post("/interested", function (req, res) {
