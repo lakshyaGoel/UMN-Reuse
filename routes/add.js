@@ -103,7 +103,7 @@ router.post('/:itemType/', upload.single('photo'),function(req, res, next){
                 console.log(req.body);
                 var addLocation = {
                     "type": "Point",
-                    "coordinates": [req.body.lat, req.body.lon]
+                    "coordinates": [req.body.lon, req.body.lat]
                 };
 
                 item.location["type"] = "Point";
