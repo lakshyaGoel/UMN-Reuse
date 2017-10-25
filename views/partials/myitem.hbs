@@ -7,7 +7,7 @@
 			<button class="delete close-modal" aria-label="close"></button>
 		</header>
 		<section class="modal-card-body">
-			<p>Add this item by following people...</p>
+			<p>Item Added By The Following People...</p>
 			<div class="user-list content">
 
 			</div>
@@ -17,10 +17,10 @@
 
 <div class="columns">
   <div class="column item-posted">
+    <center>
     <h1 class="title is-5">Items Posted</h1>
-	  <div class="columns is-multiline">
-      {{#each personalitems}}
-          <div class="column cardColumn">
+    {{#each personalitems}}
+          <div class="is-half column cardColumn">
               <div class="card">
                   <div class="card-image">
                       <figure class="image is-4by3">
@@ -61,17 +61,18 @@
                   </footer>
               </div>
           </div>
+
       {{/each}}
-	  </div>
+    </center>
   </div>
 	{{!-- END Item posted column--}}
 
 
   <div class="column">
+    <center>
     <h1 class="title is-5">Items Saved</h1>
-	  <div class="columns is-multiline">
-    {{#each uItem}}
-        <div class="column cardColumn">
+	  {{#each uItem}}
+        <div class="is-half column column cardColumn">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-4by3">
@@ -97,6 +98,6 @@
             </div>
         </div>
     {{/each}}
-	  </div>
-  </div>
+  </center>
+	</div>
 </div>
