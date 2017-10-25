@@ -171,8 +171,7 @@ router.post('/item-save', function (req, res) {
     });
 });
 router.post('/item-delete',function(req, res){
-    console.log("detect:", req.body.isRoadside);
-    if(req.body.isRoadside){
+    if(eval(req.body.isRoadside)){
        var RoadsideItem = require("../model/roadsideItem");
         RoadsideItem.deleteOne({"_id": ObjectId(req.body.id)})
             .then(function(){

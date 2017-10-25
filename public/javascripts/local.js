@@ -71,12 +71,12 @@ $(function () {
 
 
     // item delete
-    $(".item-delete").on("click", function () {
+    $(document).on("click", ".item-delete",function () {
         var itemId = $(this).parent().find(".itemID").text();
         var isRoadside = false;
         var $item = $(this);
 
-        if(!$("section-Roadside").hasClass("is-hidden")){
+        if(!$("#section-Roadside").hasClass("is-hidden")){
             isRoadside = true;
         }
         $.ajax({
