@@ -18,10 +18,9 @@ CSCI 5117, Fall 2017, [assignment description](https://docs.google.com/document/
 
 ## Key Features
 
-**Describe the most challenging features you implemented
-(one sentence per bullet, maximum 4 bullets):**
-
-* ...
+* Allows user to post something they want to sell.
+* Provides a list of items on the curb with the location on the map.
+* Protects Seller's privacy by posting a notification with the details of the prospective buyer.
 
 
 ## Screenshots of Site
