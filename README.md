@@ -28,7 +28,17 @@ CSCI 5117, Fall 2017, [assignment description](https://docs.google.com/document/
 **[Add a screenshot of each key page (maximum 4)](https://stackoverflow.com/questions/10189356/how-to-add-screenshot-to-readmes-in-github-repository)
 along with a very brief caption:**
 
-![](https://media.giphy.com/media/XIqCQx02E1U9W/giphy.gif)
+Top page(show all selling item posted by user)
+![top](./screenshots/top.jpg)
+
+On the curb page(show all free item on the curb information posted by user)
+![on the curb](./screenshots/roadside.jpg)
+
+My item page(manage item added by user, and wishlist)
+![myitem](./screenshots/myitem.jpg)
+
+Item add page(on the curb version)
+![add](./screenshots/addpage.jpg)
 
 
 ## External Dependencies
@@ -37,6 +47,11 @@ along with a very brief caption:**
 * request: controlling http?. Maybe default to express. But to prevent plagiarism, I write that
 * Sass: css preprocessor
 * Ruby: to use Sass
+* grunt: scss auto compile
+* grunt-contrib: add grunt functionality(scss auto compile)
+* grunt-contrib-scss: add grunt functionality(scss auto compile)
+* grunt-contrib-watch: add grunt functionality(scss auto compile)
+* express-hbs: we use express-hbs instead of hbs to customize hbs functionality(e.g. partial, helper)
 * mongoDB: To store the data
 * mongooseJS: To develop schemas for mongoDB
 * auth0: Authentication library for User Sign Up and Sign In
