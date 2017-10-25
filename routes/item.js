@@ -24,8 +24,16 @@ router.get('/', function (req, res, next) {
             console.log(err);
         }
         if (column) {
-            uItem = JSON.parse(JSON.stringify(column));
-            console.log(uItem);
+          var newData = [];
+          column.forEach(function (x) {
+              var a = JSON.parse(JSON.stringify(x));
+              for (var i = 0; i < a["photo"].length; i++) {
+                  a["photo"][i]["path"] = a["photo"][i]["path"].replace("public", "");
+              }
+              newData.push(a);
+            })
+            console.log(newData);
+            uItem = JSON.parse(JSON.stringify(newData));
         }
     });
     Item.find().where({
@@ -35,7 +43,16 @@ router.get('/', function (req, res, next) {
             console.log(err);
         }
         if (column) {
-            pitem = JSON.parse(JSON.stringify(column));
+          var newData = [];
+          column.forEach(function (x) {
+              var a = JSON.parse(JSON.stringify(x));
+              for (var i = 0; i < a["photo"].length; i++) {
+                  a["photo"][i]["path"] = a["photo"][i]["path"].replace("public", "");
+              }
+              newData.push(a);
+            })
+            console.log(newData);
+            pitem = JSON.parse(JSON.stringify(newData));
         }
     });
     RSItem.find().exec(function (err, column) {
